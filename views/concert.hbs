@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link href="mainpageStyle.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    
+    <body>
+        
+        <form id="search" action="/mainpage" method="post">
+            <input type="text" name="track" id="trackSearch" placeholder="Please enter a song">
+            <input id="searchButton" type="submit" value="Search">
+        </form>
+        
+        <form action="/concert" method="get">
+            <input id="concertButton" type="submit" value="Look for concert">
+        </form>
+<!--
+        
+        <form action="/mainpage" method="get">
+            <h2>{{songTitle0}}</h2>
+            <h3>{{artist0}}</h3>
+            <img src="{{img0}}">
+            <input id="some" name="songName" value="">
+            <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+        </form>
+        
+        <form action="/mainpage" method="get">
+            <h2>{{songTitle1}}</h2>
+            <h3>{{artist1}}</h3>
+            <img src="{{img1}}">
+            <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+        </form>
+        
+        <form action="/mainpage" method="get">
+            <h2>{{songTitle2}}</h2>
+            <h3>{{artist2}}</h3>
+            <img src="{{img2}}">
+            <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+        </form>
+        
+        
+        <form action="/mainpage" method="get">
+            <h2>{{songTitle3}}</h2>
+            <h3>{{artist3}}</h3>
+            <img src="{{img3}}">
+            <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+        </form>
+        
+        <form action="/mainpage" method="get">
+            <h2>{{songTitle4}}</h2>
+            <h3>{{artist4}}</h3>
+            <img src="{{img4}}">
+            <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+        </form>
+-->
+        
+        
+<!--
+        <h2>{{songTitle1}}</h2>
+        <h3>{{artist1}}</h3>
+        <img src="{{img1}}">
+        <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+
+        
+        <h2>{{songTitle2}}</h2>
+        <h3>{{artist2}}</h3>
+        <img src="{{img2}}">
+        <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+
+        
+        <h2>{{songTitle3}}</h2>
+        <h3>{{artist3}}</h3>
+        <img src="{{img3}}">
+        <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+
+        
+        <h2>{{songTitle4}}</h2>
+        <h3>{{artist4}}</h3>
+        <img src="{{img4}}">
+        <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+-->
+
+        
+        {{> footer}}
+
+    </body>
+</html>
