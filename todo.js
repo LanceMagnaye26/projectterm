@@ -153,7 +153,6 @@ var addPlaylist = (usersArr, song) => {
 	usersArr = loadFile();
 	for (var user in Object.keys(usersArr)) {
 		if(Object.values(usersArr)[user].loggedin == "yes") {
-			console.log(song)
 			if (song in Object.values(usersArr)[user].playlist) {
 				console.log('Song already existed')
 			}else {
@@ -163,6 +162,8 @@ var addPlaylist = (usersArr, song) => {
 	}
 	writeFile(usersArr);
 }
+
+// var showPlaylist = ();
 
 module.exports = {
 	loadFile, writeFile, addUser, passCheck, duplicateUsers, loginCheck, getTracks, logoutCheck, addPlaylist

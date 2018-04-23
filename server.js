@@ -55,11 +55,11 @@ app.get('/displayPlaylist', (request, response) => {
 	})
 })
 
-app.get('/concert', (request,response) => {
-	response.render('concert.hbs', {
-		title: 'Concerts near me'
-	})
-})
+// app.get('/concert', (request,response) => {
+// 	response.render('concert.hbs', {
+// 		title: 'Concerts near me'
+// 	})
+// })
 
 app.get('/signup', (request, response) => {
 	response.render('signup.hbs', {

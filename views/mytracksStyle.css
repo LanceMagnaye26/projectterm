@@ -19,6 +19,37 @@
     cursor: pointer;
 }
 
+.songTitle {
+    position: absolute;
+    top:0%;
+    left:30%;
+}
+
+.artist {
+    position: absolute;
+    top:30%;
+    left:30%;
+}
+
+.image {
+    position:absolute;
+    left:0%;
+    top:0%;
+}
+
+.songForm {
+    position:relative;
+    height:200px;
+    width:100%;
+    margin-bottom: 10%;
+}
+
+.addtoPlaylist{
+    bottom:0px;
+    position: absolute;
+    left:0px;
+}
+
 #searchButton {
     background-color: white; 
     color: black; 
@@ -35,9 +66,8 @@
     left:0px;
     right:0px;
     margin:auto;
-    top:10%;
-    width:50%;
-    height:100%;
+    top:20%;
+    width:40%;
 }
 
 #logoutButton {
@@ -65,4 +95,10 @@
 
 .invisible {
     display:none;
+}
+
+#playlistForm {
+    position:absolute;
+    right:5%;
+    top:5%;
 }
