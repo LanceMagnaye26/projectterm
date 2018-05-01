@@ -36,20 +36,20 @@ app.get('/', (request, response) => {
 });
 
 app.post('/', (request, response) => {
-	// a_user = request.body.userLogin;
-	// a_pass = request.body.passLogin;
 	if ( todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin) == 1) {
 		response.render('mainpage.hbs', {
-			title: 'Main page'
+			title: 'Main page',
+			signinCheck: todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin)
 		})
 	}else {
 		response.render('login.hbs', {
-			title:'Login page'
+			title:'Login page',
+			signinCheck: todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin)
 		});
 	}
 });
 
-app.get('/displayPlaylist', (request, response) => {
+app.get('/playlist', (request, response) => {
 	response.render('playlist.hbs', {
 		title: 'My Playlist'
 	})
@@ -82,8 +82,8 @@ app.get('/mainpage', (request, response) => {
 app.post('/mainpage', (request, response) => {
 	todo.getTracks(request.body.track, key).then((result) => {
 		var trackList = {};
-		if(result.length == 1) {
-			response.render('mainpage.hbs', result[songTitle0])
+		if('Error' in result) {
+			response.render('mainpage.hbs', result)
 		} else{
 			for (var i in Object.keys(result)) {
 				trackList[`songTitle${i}`] = Object.values(result)[i].songTitle
@@ -128,14 +128,21 @@ app.post('/tracks', (request, response) => {
 // })
 
 app.post('/signup', (request, response) => {
-	if(todo.passCheck(request.body.password1, request.body.password2)==1) {
-		todo.addUser(accounts, request.body.emailAddr, request.body.password1);
-		response.render('congratulations.hbs', {
-			title: 'Congratulations'
-		});
+	if(todo.duplicateUsers(accounts,request.body.emailAddr)==1) {
+		if(todo.passCheck(request.body.password1, request.body.password2)==1) {
+			todo.addUser(accounts, request.body.emailAddr, request.body.password1);
+			response.render('congratulations.hbs', {
+				title: 'Congratulations'
+			});
+		}else {
+			response.render('signup.hbs', {
+				title: 'Signup page'
+			});
+		}
 	}else {
 		response.render('signup.hbs', {
-			title: 'Signup page'
+			title: 'Signup page',
+			signupCheck : 0	
 		});
 	}
 });

@@ -26,12 +26,16 @@
         <script>
             var accounts=[];       
             document.getElementById("saveButton").addEventListener("click", function(){
+                
+//                if({{signupCheck}}!=1) {
+//                    alert('User already exist!');
+//                }
+                
                 if(document.getElementById('password1').value != document.getElementById('password2').value) {
                     alert('Passwords do not match');
                 };
             });
-
-
+            
 
         </script>
         

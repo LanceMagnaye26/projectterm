@@ -16,12 +16,10 @@ var loadFile = () => {
 
 var duplicateUsers = (usersArr, username) => {
 	usersArr = loadFile();
-	for (var i = 0; i < usersArr.length; i++) {
-		if(username == usersArr[i].user) {
-			return 0
-		}else {
-			return 1
-		}
+	if (username in usersArr) {
+		return 0
+	}else {
+		return 1
 	}
 };
 
@@ -97,7 +95,7 @@ var getTracks = (trackName, key) => {
       	console.log(error);
       }else if (body.results['opensearch:totalResults'] == 0) {
       	resolve({
-      		'Could not find song': 'Could not find song'
+      		Error: 'Could not find song'
       	});
       }else {
       	var trackObject = {};
@@ -153,7 +151,7 @@ var addPlaylist = (usersArr, song) => {
 	usersArr = loadFile();
 	for (var user in Object.keys(usersArr)) {
 		if(Object.values(usersArr)[user].loggedin == "yes") {
-			if (song in Object.values(usersArr)[user].playlist) {
+			if (Object.values(usersArr)[user].playlist.includes(song)) {
 				console.log('Song already existed')
 			}else {
 				Object.values(usersArr)[user].playlist.push(song);
@@ -163,7 +161,6 @@ var addPlaylist = (usersArr, song) => {
 	writeFile(usersArr);
 }
 
-// var showPlaylist = ();
 
 module.exports = {
 	loadFile, writeFile, addUser, passCheck, duplicateUsers, loginCheck, getTracks, logoutCheck, addPlaylist
