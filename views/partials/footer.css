@@ -1,0 +1,16 @@
+#footer {
+    height:10%;
+    color:lightgray;
+    font-family: sans-serif;
+    width:20%;
+    word-wrap:break-word;
+    text-align:center;
+    font-size:small;
+    font-weight:bold;
+    position:absolute;
+    bottom:20%;
+    right:0px;
+    left:0px;
+    margin:auto;
+    border-top:solid 1px grey;
+}

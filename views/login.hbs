@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link href="loginStyle.css" rel="stylesheet" type="text/css">
+        <link href="/partials/footer.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    <body>
+        
+        <form id="signup" action="/signup" method="get">
+            <input id="signupButton" type="submit" value="Sign up"/>
+        </form>
+        
+        <div id="userLoginHeader">
+            <img id="logo" src="EventPlugLogo.png" />
+        </div>
+        
+        <form action="/" method="post" id="login">
+            <input name="userLogin" class="userInp" id="username" type="email" placeholder="Email address or Username" required>
+            <br/ >
+            <input name="passLogin" class="userInp" id="password"  type="password" placeholder="Password" required>
+            <input id="signinButton" type="submit" value="Sign In">
+            <p id="forgot">Forgot your username/password?</p>
+        </form>
+        
+        {{> footer}}
+        
+        <script>
+            if({{signinCheck}} == 0) {
+                alert("Incorrect username or password")
+            }
+        </script>
+        
+    </body>
+    
+    
+</html>
