@@ -13,7 +13,7 @@
             <input id="searchButton" type="submit" value="Search">
         </form>
         
-        <form id="logoutForm" action="/" method="get">
+        <form action="/" method="get">
             <input id="logoutButton" type="submit" value="Log out">
         </form>
         
@@ -23,12 +23,12 @@
         
         <div id="songList">
             <form class="songForm" action="/tracks" method="post">
-                <h2 name="songName" class="songTitle">{{songTitle0}}</h2>
-                <h3 name="artistName" class="artist">{{artist0}}</h3>
-                <img name="imageName" class="image" src="{{img0}}">
+                <h2 class="songTitle">{{songTitle0}}</h2>
+                <h3 class="artist">{{artist0}}</h3>
+                <img class="image" src="{{img0}}">
                 <br>
-                <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-<!--                <input type="hidden" name="songName" value="{{songTitle0}}">-->
+                <input onclick="myFunction()" class="addtoPlaylist" type="submit" value="Add to playlist"/>
+                <input class="invisible" type="hidden" name="songName" value="{{songTitle0}}">
             </form>
 
             <form class="songForm" action="/tracks" method="post">
@@ -37,7 +37,7 @@
                 <img class="image" src="{{img1}}">
                 <br>
                 <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input type="hidden" name="songName" value="{{songTitle1}}">
+                <input class="invisible" type="hidden" name="songName" value="{{songTitle1}}">
             </form>
 
             <form class="songForm" action="/tracks" method="post">
@@ -46,7 +46,7 @@
                 <img class="image" src="{{img2}}">
                 <br>
                 <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input type="hidden" name="songName" value="{{songTitle2}}">
+                <input class="invisible" type="hidden" name="songName" value="{{songTitle2}}">
             </form>
 
             <form class="songForm" action="/tracks" method="post">
@@ -55,7 +55,7 @@
                 <img class="image" src="{{img3}}">
                 <br>
                 <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input type="hidden" name="songName" value="{{songTitle3}}">
+                <input class="invisible" type="hidden" name="songName" value="{{songTitle3}}">
             </form>
 
             <form class="songForm" action="/tracks" method="post">
@@ -64,19 +64,13 @@
                 <img class="image" src="{{img4}}">
                 <br>
                 <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input type="hidden" name="songName" value="{{songTitle4}}">
+                <input class="invisible" type="hidden" name="songName" value="{{songTitle4}}">
             </form>
-            
-            
+
+
         </div>
         
         {{> footer}}
-        <script>
-            if(document.getElementById("invis").value == 1){
-                alert("You have added a song!")
-            }else if {
-                alert("Song already existed!")
-            }
-        </script>
+        
     </body>
 </html>

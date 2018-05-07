@@ -19,6 +19,7 @@
     right:0px;
     top:0px;
     margin:auto;
+    outline:none;
 }
 
 #username {
@@ -54,10 +55,11 @@
 }
 
 #signupButton:hover {
-    background-color:darkcyan;
+    background-color:#083B66;
     color:white;
     font-weight: 20px;
 }
+
 #forgot{
     position: absolute;
     text-align: center;
@@ -73,7 +75,7 @@
 }
 
 #forgot:hover {
-    color:darkcyan;
+    color:#083B66;
     font-weight: 20px;
 }
 
@@ -96,7 +98,7 @@
 }
 
 #signinButton:hover {
-    background-color:darkcyan;
+    background-color:#083B66;
     color:white;
     font-weight: 20px;
 }

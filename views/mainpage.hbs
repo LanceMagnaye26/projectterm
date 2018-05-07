@@ -7,21 +7,22 @@
     
     <body>
         
+<!--
+        <form action="/concert" method="get">
+            <input id="concertButton" type="submit" value="Look for concert">
+        </form>
+-->
+        
         <form id="search" action="/mainpage" method="post">
-            <input type="text" name="track" id="trackSearch" placeholder="Please enter a song"> 
+            <input type="text" name="track" id="trackSearch" placeholder="Please enter a song">
             <input id="searchButton" type="submit" value="Search">
         </form>
         
-        <form id="logoutForm" action="/" method="get">
+        <form action="/" method="get">
             <input id="logoutButton" type="submit" value="Log out">
         </form>
         
-
-        <form id="playlistForm" action="/playlist" method="get">
-            <input id="playlistButton" type="submit" value="Show my playlist">
-        </form>
-        
-        <h1>{{Error}}</h1>
+        <h1>{{songTitle0}}</h1>
         
         {{> footer}}
         

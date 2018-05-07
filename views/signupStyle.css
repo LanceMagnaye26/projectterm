@@ -1,34 +1,147 @@
 #signup {
     position:absolute;
-    right:38%;
-    bottom:0px;
+    text-align:center;
+    left:0px;
+    right:0px;
     top:0px;
-    margin:auto;
-    width:25%;
-    height:50%;
-    text-align: left;
-}
-
-#saveButton {
-    background-color: grey;
-    border: none;
-    color: white;
-    padding: 5px 60px;
-    text-decoration: none;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    position:absolute;
     bottom:10%;
+    margin:auto;
+    width:50%;
+    height:50%;
+    font-style: sans-serif;
+}
+
+.userInp {
+    width:50%;
+    height:10%;
+    font-family: sans-serif;
+    padding:3px;
+    border-radius:5px;
+    position:relative;
+    outline: none;
+}
+
+#name {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+#username {
+    margin-top:5px;
+    margin-bottom:5px;
+    
+}
+
+#password1 {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+#password2 {
+    margin-top:5px;
+    margin-bottom:7px;
+}
+
+#answer {
+    margin-top:7px;
+    margin-bottom:5px;
+}
+
+#confirm {
+    margin-top:5px;
+}
+
+#logo {
+    display:block;
+    margin:auto;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    position:relative;
+    width:425px;
+}
+
+#userLoginHeader {
+    border-bottom:1px solid #d9dadc;
+    padding:25px 0 10px;
+    margin-bottom:30px;
+    text-align:center;
+    display:inline-block;
+    max-width:100%;
+    width:100%;
 }
 
 #saveButton {
-    background-color: white; 
-    color: black; 
-    border: 2px solid grey;
+    position:absolute;
+    text-align:center;
+    cursor:pointer;
+    left:0px;
+    right:0px;
+    bottom:-30%;
+    margin:auto;
+    background-color:#8DCAFF; 
+    color:white;
+    border:none;
+    width:150px;
+    height:50px;
+    font-size: 25px;
+    transition: 1s;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
 }
 
 #saveButton:hover {
-    background-color: grey;
+    background-color:#083B66;
+    color:white;
+    font-weight: 20px;
+}
+
+#dropbtn {
+    background-color:#9A9A9A;
     color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    transition:0.5s;
+    font-family: sans-serif;
+}
+
+#dropdown {
+    position: relative;
+    border-radius:10px;
+    left:0px;
+    right:0px;
+    margin:auto;
+    transition:0.5s;
+    width:40%;
+    cursor:pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #8DCAFF;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    font-family: sans-serif;
+    transition:0.5s;
+    z-index: 5;
+    width:100%;
+}
+
+.dropdown-content a {
+    color:white;
+    padding:10px 10px;
+    text-decoration: none;
+    display: block;
+    transition:0.5s;
+}
+
+.dropdown-content a:hover {
+    background-color:#083B66 
+}
+
+#dropdown:hover .dropdown-content {
+    display:block;
 }
