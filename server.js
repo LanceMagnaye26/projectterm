@@ -39,7 +39,7 @@ app.get('/', (request, response) => {
 });
 
 app.get('/venues', (request, response) => {
-    todo.getArtistID("Post Malone", 'aFVE4X3HUdTMjVLm').then((result) => {
+    todo.getArtistID("", 'aFVE4X3HUdTMjVLm').then((result) => {
         return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
     }).then((result) => {
         response.render('map.hbs', {
