@@ -26,5 +26,10 @@
         
         {{> footer}}
         
+        <script>
+            if({{signinCheck}} == 0) {
+                alert("Incorrect username or password")
+            }
+        </script>
     </body>
 </html>

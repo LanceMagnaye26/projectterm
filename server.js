@@ -91,24 +91,28 @@ app.post('/tracks', (request, response) => {
 
 
 app.post('/signup', (request, response) => {
-	if(todo.duplicateUsers(accounts,request.body.emailAddr)==1) {
-		if(todo.passCheck(request.body.password1, request.body.password2)==1) {
-			console.log('yo')
-			todo.addUser(accounts, request.body.emailAddr, request.body.password1);
-			response.render('congratulations.hbs', {
-				title: 'Congratulations'
+	if(todo.duplicateUsers(accounts,request.body.userLogin)==1) {
+		if(todo.passCheck(request.body.passLogin, request.body.passLogin2)==1) {
+			if(todo.passCheck(request.body.userAnswer, request.body.userAnswer2)==1) {
+				todo.addUser(accounts, request.body.userLogin, request.body.passLogin, request.body.userName, request.body.userQuestion, request.body.userAnswer);
+				response.render('congratulations.hbs', {
+					title: 'Congratulations'
+				});
+			}else {
+				response.render('signup.hbs', {
+				title: 'Signup page',
+				signupCheck: 2
 			});
+			}
 		}else {
-			console.log('pass')
 			response.render('signup.hbs', {
 				title: 'Signup page',
 				signupCheck: 1
 			});
 		}
 	}else {
-		console.log('dup')
 		response.render('signup.hbs', {
-			title: 'Signup page',
+			title: 'Signup page',	
 			signupCheck: 0	
 		});
 	}

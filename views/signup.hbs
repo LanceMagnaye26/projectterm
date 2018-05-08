@@ -13,21 +13,26 @@
         
         <form action="/signup" id="signup" method="post">
             <input name="userName" class="userInp" id="name" type="text" placeholder="Please enter your name" required>
+            
             <input name="userLogin" class="userInp" id="username" type="email" placeholder="Please enter your email address" required>
+            
             <input name="passLogin" class="userInp" id="password1"  type="password" placeholder="Enter your password" required>
-            <input name="passLogin" class="userInp" id="password2"  type="password" placeholder="Re-enter your password" required>
+            
+            <input name="passLogin2" class="userInp" id="password2"  type="password" placeholder="Re-enter your password" required>
+            
             
             <div id="dropdown">
-              <div id="dropbtn" name="question">Choose your security question</div>
-              <div class="dropdown-content">
-                <a href="#" id="q1">What is your mother's maiden name?</a>
-                <a href="#" id="q2">Where is your birth place?</a>
-                <a href="#" id="q3">When is your best friend's birthday?</a>
-              </div>
+                <select id="dropbtn" name="userQuestion">
+                    <option value="" disabled selected>Choose your security question</option>
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="Where is your birth place?">Where is your birth place?</option>
+                    <option value="When is your best friend's birthday?">When is your best friend's birthday?</option>
+                </select>
             </div>
             
-            <input name="qAnswer" class="userInp" id="answer"  type="password" placeholder="Answer the chosen security question" required>
-            <input name="qAnswer" class="userInp" id="confirm"  type="password" placeholder="Confirm answer" required>
+            <input name="userAnswer" class="userInp" id="answer"  type="text" placeholder="Answer the chosen security question" required>
+            
+            <input name="userAnswer2" class="userInp" id="confirm"  type="text" placeholder="Confirm answer" required>
             
             <input id="saveButton" type="submit" value="Register"/>
         </form>
@@ -35,31 +40,16 @@
         {{> footer}}
         
         <script>
-            var accounts=[];       
-            document.getElementById("saveButton").addEventListener("click", function(){
-                if(document.getElementById('password1').value != document.getElementById('password2').value) {
-                    alert('Passwords do not match');
-                };
-            });
             
-            document.getElementById("q1").addEventListener("click", function(){
-                document.getElementById("dropbtn").innerHTML = document.getElementById("q1").innerHTML;
-                document.getElementById("dropbtn").value = document.getElementById("q1").innerHTML;
-            });
-            
-            document.getElementById("q2").addEventListener("click", function(){
-                document.getElementById("dropbtn").innerHTML = document.getElementById("q2").innerHTML;
-            });
-            
-            document.getElementById("q3").addEventListener("click", function(){
-                document.getElementById("dropbtn").innerHTML = document.getElementById("q3").innerHTML;
-            });
-            
-            document.getElementById("saveButton").addEventListener("click", function(){
-                if(document.getElementById('answer').value != document.getElementById('confirm').value) {
-                    alert('Security answers do not match');
-                };
-            });
+            if ({{signupCheck}} == 0) {
+                alert("Email a lready existed!")
+            };
+            if ({{signupCheck}} == 1){
+                alert("Passwords do not match!")
+            };
+            if ({{signupCheck}} == 2){
+                alert("Security answers do not match!")
+            };
         </script>
     </body>
 </html>
