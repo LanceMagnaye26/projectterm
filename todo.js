@@ -4,6 +4,8 @@ const request = require('request');
 
 /**
  * This function loads the 'accounts.json' file
+ * @author EventPlug
+ * @version 2.0
  */
 var loadFile = () => {
 	try {
@@ -95,29 +97,47 @@ var addUser = (usersArr, username, password, name, question, answer) => {
 
 
 /**
- * This function connects to the ticket master API to find the name of the concert and url dates
+ * This function connects to the SongKick API to find the name of the concert and url dates
  * @async
- * @param {string} keyword - The artist that is featured or a part of the concert that is being searched for
+ * @param {string} is - The artist that is featured or a part of the concert that is being searched for
  * @param {string} key - API key
- * @todo  this is being replaced by a new API in a future update
  * @requires request
  */
-var getConcert = (keyword, key) => {
-	return new Promise ((resolve, reject) => {
-		request({
-			url: `https://app.ticketmaster.com/discovery/v2/events.json?keyword=${encodeURIComponent(keyword)}&city=Vancouver&countrCode=CA&classificationName=music&apikey=${key}`,
-			json: true
-		}, (error, response, body) => {
-			console.log(body._embedded.events[0])
-			resolve({
-				concertName: body._embedded.events[0].name,
-				url: body._embedded.events[0].url,
-				dates: body._embedded.events[0].dates.start.dateTime
-
-			})
-		})
-	});
-}
+var getConcerts = (id, apiKey) => {
+    return new Promise((resolve,reject) => {
+        request({
+            url: `http://api.songkick.com/api/3.0/artists/${id}/calendar.json?apikey=${apiKey}`,
+            json: true
+        }, (error, response, body) => {
+            if (error) {
+                reject('Cannot connect to Songkick API');
+                console.log(error);
+            }else if (body.resultsPage.totalEntries == 0) {
+                resolve({
+                    error : 'Concert not Found'
+                });
+            }else {
+                var concertlist = [];
+                var concertThing = {};
+                var innerConcert = {};
+                for (var i = 0; i < body.resultsPage.results.event.length; i++) {
+                    concertThing['event' + i] = {
+                        name: body.resultsPage.results.event[i].venue.displayName,
+                        date: body.resultsPage.results.event[i].start.date,
+                        city: body.resultsPage.results.event[i].location.city,
+                        lat: body.resultsPage.results.event[i].location.lat,
+                        lng: body.resultsPage.results.event[i].location.lng
+                    };
+                }
+                resolve(concertThing);
+                // resolve({
+                //     uri: body.resultsPage.results.artist[0]['uri'],
+                //     id: body.resultsPage.results.artist[0]['id']
+                // });
+            }
+        });
+    });
+};
 
 
 /**
@@ -152,6 +172,79 @@ var getTracks = (trackName, key) => {
       } 
     });
   });
+};
+
+/**
+ * This function gets the location of concerts
+ * @async
+ * @param {string} id - Name of the artist you want to find concerts for
+ * @param {string} apiKey - API key
+ * @requires request
+ */
+var getConcerts = (id, apiKey) => {
+    return new Promise((resolve,reject) => {
+        request({
+            url: `http://api.songkick.com/api/3.0/artists/${id}/calendar.json?apikey=${apiKey}`,
+            json: true
+        }, (error, response, body) => {
+            if (error) {
+                reject('Cannot connect to Songkick API');
+                console.log(error);
+            }else if (body.resultsPage.totalEntries == 0) {
+                resolve({
+                    error : 'Concert not Found'
+                });
+            }else {
+                var concertlist = [];
+                var concertThing = {};
+                var innerConcert = {};
+                for (var i = 0; i < body.resultsPage.results.event.length; i++) {
+                    concertThing['event' + i] = {
+                        name: body.resultsPage.results.event[i].venue.displayName,
+                        date: body.resultsPage.results.event[i].start.date,
+                        city: body.resultsPage.results.event[i].location.city,
+                        lat: body.resultsPage.results.event[i].location.lat,
+                        lng: body.resultsPage.results.event[i].location.lng
+                    };
+                }
+                resolve(concertThing);
+                // resolve({
+                //     uri: body.resultsPage.results.artist[0]['uri'],
+                //     id: body.resultsPage.results.artist[0]['id']
+                // });
+            }
+        });
+    });
+};
+
+/**
+ * This function gets the artist ID
+ * @async
+ * @param {string} artist - Name of the artist you want to search
+ * @param {string} apiKey - API key
+ * @requires request
+ */
+var getArtistID = (artist, apiKey) => {
+    return new Promise((resolve,reject) => {
+        request({
+            url: `http://api.songkick.com/api/3.0/search/artists.json?apikey=${apiKey}&query=${encodeURIComponent(artist)}`,
+            json: true
+        }, (error, response, body) => {
+            if (error) {
+                reject('Cannot connect to Songkick API');
+                console.log(error);
+            }else if (body.resultsPage.results == undefined) {
+                resolve({
+                    error : 'Artist Not Found'
+                });
+            }else {
+                resolve({
+                    uri: body.resultsPage.results.artist[0]['uri'],
+                    id: body.resultsPage.results.artist[0]['id']
+                });
+            }
+        });
+    });
 };
 
 
@@ -197,5 +290,5 @@ var addPlaylist = (usersArr, song, artist, image) => {
  * @module exporting all the functions
  */
 module.exports = {
-	loadFile, writeFile, addUser, passCheck, duplicateUsers, loginCheck, getTracks, logoutCheck, addPlaylist
+    loadFile, writeFile, addUser, passCheck, duplicateUsers, loginCheck, getTracks, logoutCheck, addPlaylist, getTracks, getConcerts, getArtistID
 };

@@ -35,6 +35,28 @@ app.get('/', (request, response) => {
 	})
 });
 
+app.get('/venues', (request, response) => {
+    todo.getArtistID("Post Malone", songKickKey).then((result) => {
+        return todo.getConcerts(result.id, songKickKey);
+    }).then((result) => {
+        response.render('map.hbs', {
+            title: 'Maps',
+            events: result
+        })
+    })
+});
+
+app.post('/venues', (request, response) => {
+    todo.getArtistID(request.body.artist, songKickKey).then((result) => {
+        return todo.getConcerts(result.id, songKickKey);
+    }).then((result) => {
+        response.render('map.hbs', {
+            title: 'Maps',
+            events: result
+        })
+    })
+});
+
 app.post('/', (request, response) => {
 	if ( todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin) == 1) {
 		response.render('mainpage.hbs', {
