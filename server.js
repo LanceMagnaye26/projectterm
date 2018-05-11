@@ -5,7 +5,9 @@ const fs = require('fs');
 const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const todo = require('./todo.js');
-
+const Lyricist = require('lyricist/node6');
+const lyricist = new Lyricist('wj4t6ZnMsotFYe9tCuXQT2JIhAi9QeNmkKDFUplMNoZBJRyZfRAWAYer9TBP3XPR');
+ 
 var key = '88668b813557eb90cd2054ce6cd4c990';
 var app = express();
 

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const request = require('request');
-
+const Lyricist = require('lyricist/node6');
+const lyricist = new Lyricist('wj4t6ZnMsotFYe9tCuXQT2JIhAi9QeNmkKDFUplMNoZBJRyZfRAWAYer9TBP3XPR');
 
 /**
  * This function loads the 'accounts.json' file
@@ -292,3 +293,44 @@ var addPlaylist = (usersArr, song, artist, image) => {
 module.exports = {
     loadFile, writeFile, addUser, passCheck, duplicateUsers, loginCheck, getTracks, logoutCheck, addPlaylist, getTracks, getConcerts, getArtistID
 };
+
+//lyric program
+var querySong = function(songName, artistName) {
+  return new Promise(function(resolve, reject) {
+    lyricist.search(songName).then((results) => { // results is the array of the returned search results
+      results.some((song, index, _arr) => { // Loop through the idvidual songs
+        if(artistName == "") { // if the aristName wasn't provided in searchForSong
+          console.log("No artist provided."); // Choosing random top song");
+          //var randIdx = getRndInteger(0, results.length);
+          //console.log("Index %d chosen", randIdx);
+          //resolve(results[randIdx]);
+          //return true;
+        } 
+        else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
+          resolve(song);      
+        }
+    });
+  });
+});
+}
+
+function searchForSong(songName, artistName="", fetchLyrics=false) { // changed artistName to have a default of "", so we can do searchForSong(songName);
+ 
+  querySong(songName, artistName).then((song) => {
+    if(song.id == 0) {
+      console.log("Invalid Song ID.");
+    }
+ 
+    console.log("Song Name: " + song.title);
+    console.log("Song ID: " + song.id);
+    console.log("Song Artist:" + song.primary_artist.name);
+   
+    if(fetchLyrics) {
+      lyricist.song(song.id, { fetchLyrics: true }).then((results) => {
+        console.log(results.lyrics);
+      });
+    }
+  });
+}
+ 
+// FORMAT FOR SEARCH: searchForSong("lift yourself", "kanye west", true);
