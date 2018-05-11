@@ -1,0 +1,64 @@
+html, body {
+    height:100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#map {
+    height: 80%;
+    margin: auto;
+}
+
+#searchContainter {
+    height:10%;
+    margin:auto;
+    position:relative;
+}
+
+#artist {
+    font-size: 100%;
+    width:25%;
+    height:10%;
+    font-family: sans-serif;
+    padding:3px;
+    border-radius:5px;
+    position:absolute;
+    left:0px;
+    right:0px;
+    top:5%;
+    margin:auto;
+    outline: none;
+}
+
+#search {
+    height:200px;
+    margin: auto;
+    position: relative;
+}
+
+#lookfor{
+    position:absolute;
+    text-align:center;
+    cursor:pointer;
+    left:0px;
+    right:0px;
+    top: 22%;
+    margin:auto;
+    background-color:#8DCAFF; 
+    color:white;
+    border:none;
+    width:25%;
+    height:10%;
+    font-size: 15px;
+    transition: 0.5s;
+    border-radius: 10px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+#lookfor:hover {
+    background-color:#083B66;
+    color:white;
+    font-weight: 20px;
+}
