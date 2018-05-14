@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const todo = require('./todo.js');
 
 var key = '88668b813557eb90cd2054ce6cd4c990';
+var key2 = "4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R"
 var app = express();
 
 // var trackList = {};
@@ -24,11 +25,7 @@ app.use(express.static(__dirname + '/views'));
 
 hbs.registerHelper('getCurrentYear', () => {
 	return new Date().getFullYear();
-});
-
-hbs.registerHelper('json', function(context) {
-    return JSON.stringify(context);
-});
+})
 
 app.get('/', (request, response) => {
 	todo.logoutCheck(accounts);
@@ -36,28 +33,6 @@ app.get('/', (request, response) => {
 		title: 'Login page',
 		signinCheck: 1
 	})
-});
-
-app.get('/venues', (request, response) => {
-    todo.getArtistID("", 'aFVE4X3HUdTMjVLm').then((result) => {
-        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
-    }).then((result) => {
-        response.render('map.hbs', {
-            title: 'Maps',
-            events: result
-        })
-    })
-});
-
-app.post('/venues', (request, response) => {
-    todo.getArtistID(request.body.artist, 'aFVE4X3HUdTMjVLm').then((result) => {
-        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
-    }).then((result) => {
-        response.render('map.hbs', {
-            title: 'Maps',
-            events: result
-        })
-    })
 });
 
 app.post('/', (request, response) => {
@@ -91,6 +66,7 @@ app.get('/mainpage', (request, response) => {
 		title: 'Track added!'
 	})
 });
+
 
 app.post('/mainpage', (request, response) => {
 	todo.getTracks(request.body.track, key).then((result) => {
