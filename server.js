@@ -5,7 +5,9 @@ const fs = require('fs');
 const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 const todo = require('./todo.js');
-
+const Lyricist = require('lyricist/node6');
+const lyricist = new Lyricist('wj4t6ZnMsotFYe9tCuXQT2JIhAi9QeNmkKDFUplMNoZBJRyZfRAWAYer9TBP3XPR');
+ 
 var key = '88668b813557eb90cd2054ce6cd4c990';
 var key2 = "4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R"
 var app = express();
@@ -48,11 +50,26 @@ app.post('/', (request, response) => {
 	}
 });
 
+app.get('/lyrics', (request, response) => {
+    response.render('lyrics.hbs', {
+        title: 'Find Lyrics'
+    })
+});
+
+app.post('/lyrics', (request, response) => {
+    todo.searchForSong(request.body.title, request.body.artist, true).then((result) => {
+        response.render('lyrics.hbs', {
+            title: 'Maps',
+            lyrics: result
+        })
+    })
+});
+
 app.get('/playlist', (request, response) => {
 	response.render('playlist.hbs', {
 		title: 'My Playlist'
 	})
-})
+});
 
 
 app.get('/signup', (request, response) => {
