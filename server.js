@@ -75,11 +75,26 @@ app.post('/', (request, response) => {
 	}
 });
 
+app.get('/lyrics', (request, response) => {
+    response.render('lyrics.hbs', {
+        title: 'Find Lyrics'
+    })
+});
+
+app.post('/lyrics', (request, response) => {
+    todo.searchForSong(request.body.title, request.body.artist, true).then((result) => {
+        response.render('lyrics.hbs', {
+            title: 'Maps',
+            lyrics: result
+        })
+    })
+});
+
 app.get('/playlist', (request, response) => {
 	response.render('playlist.hbs', {
 		title: 'My Playlist'
 	})
-})
+});
 
 
 app.get('/signup', (request, response) => {

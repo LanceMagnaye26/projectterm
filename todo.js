@@ -283,7 +283,27 @@ var addPlaylist = (usersArr, song, artist, image) => {
 	}
 	writeFile(usersArr);
 	return checker
-}
+};
+
+var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed artistName to have a default of "", so we can do searchForSong(songName);
+    return new Promise((resolve,reject) => {
+        querySong(songName, artistName).then((song) => {
+            if (song.id == 0) {
+                reject("Cannot find song");
+            }
+
+            console.log("Song Name: " + song.title);
+            console.log("Song ID: " + song.id);
+            console.log("Song Artist:" + song.primary_artist.name);
+
+            if (fetchLyrics) {
+                lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
+                    resolve(results.lyrics);
+                });
+            }
+        });
+    })
+};
 
 /**
  * We can use these functions in another file now.
@@ -291,7 +311,19 @@ var addPlaylist = (usersArr, song, artist, image) => {
  * @module exporting all the functions
  */
 module.exports = {
-    loadFile, writeFile, addUser, passCheck, duplicateUsers, loginCheck, getTracks, logoutCheck, addPlaylist, getTracks, getConcerts, getArtistID
+    loadFile,
+    writeFile,
+    addUser,
+    passCheck,
+    duplicateUsers,
+    loginCheck,
+    getTracks,
+    logoutCheck,
+    addPlaylist,
+    getTracks,
+    getConcerts,
+    getArtistID,
+    searchForSong
 };
 
 //lyric program
@@ -312,25 +344,8 @@ var querySong = function(songName, artistName) {
     });
   });
 });
-}
+};
 
-function searchForSong(songName, artistName="", fetchLyrics=false) { // changed artistName to have a default of "", so we can do searchForSong(songName);
- 
-  querySong(songName, artistName).then((song) => {
-    if(song.id == 0) {
-      console.log("Invalid Song ID.");
-    }
- 
-    console.log("Song Name: " + song.title);
-    console.log("Song ID: " + song.id);
-    console.log("Song Artist:" + song.primary_artist.name);
-   
-    if(fetchLyrics) {
-      lyricist.song(song.id, { fetchLyrics: true }).then((results) => {
-        console.log(results.lyrics);
-      });
-    }
-  });
-}
+
  
 // FORMAT FOR SEARCH: searchForSong("lift yourself", "kanye west", true);

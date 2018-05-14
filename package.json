@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
   },
   "author": "Nam Tran",
@@ -23,6 +23,10 @@
     "request": "^2.85.0",
     "require": "^2.4.20",
     "sweetalert": "^2.1.0",
-    "window": "^4.2.5"
+    "window": "^4.2.5",
+    "yarn": "^1.6.0"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
   }
 }
