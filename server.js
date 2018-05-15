@@ -59,7 +59,7 @@ app.get('/lyrics', (request, response) => {
 app.post('/lyrics', (request, response) => {
     todo.searchForSong(request.body.title, request.body.artist, true).then((result) => {
         response.render('lyrics.hbs', {
-            title: 'Maps',
+            title: 'Lyrics',
             lyrics: result
         })
     })
