@@ -1,6 +1,6 @@
 # projecterm
 #
-# Please run 'npm install' to install all the dependencies when this repo is freshly cloned.
+Please run 'npm install' in the command line to install all the dependencies when merging.
 #
 #
 #
