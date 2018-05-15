@@ -96,50 +96,14 @@ var addUser = (usersArr, username, password, name, question, answer) => {
 	writeFile(usersArr);
 };
 
-
-/**
- * This function connects to the SongKick API to find the name of the concert and url dates
- * @async
- * @param {string} is - The artist that is featured or a part of the concert that is being searched for
- * @param {string} key - API key
- * @requires request
- */
-var getConcerts = (id, apiKey) => {
-    return new Promise((resolve,reject) => {
-        request({
-            url: `http://api.songkick.com/api/3.0/artists/${id}/calendar.json?apikey=${apiKey}`,
-            json: true
-        }, (error, response, body) => {
-            if (error) {
-                reject('Cannot connect to Songkick API');
-                console.log(error);
-            }else if (body.resultsPage.totalEntries == 0) {
-                resolve({
-                    error : 'Concert not Found'
-                });
-            }else {
-                var concertlist = [];
-                var concertThing = {};
-                var innerConcert = {};
-                for (var i = 0; i < body.resultsPage.results.event.length; i++) {
-                    concertThing['event' + i] = {
-                        name: body.resultsPage.results.event[i].venue.displayName,
-                        date: body.resultsPage.results.event[i].start.date,
-                        city: body.resultsPage.results.event[i].location.city,
-                        lat: body.resultsPage.results.event[i].location.lat,
-                        lng: body.resultsPage.results.event[i].location.lng
-                    };
-                }
-                resolve(concertThing);
-                // resolve({
-                //     uri: body.resultsPage.results.artist[0]['uri'],
-                //     id: body.resultsPage.results.artist[0]['id']
-                // });
-            }
-        });
-    });
+var deleteUser = (username) => {
+	var usersArr = loadFile();
+	if (username in usersArr) {
+		delete usersArr[username];
+	} else {
+		return False;
+	}
 };
-
 
 /**
  * This function connects to the lastfm API to get tracks based on the search term
@@ -176,12 +140,13 @@ var getTracks = (trackName, key) => {
 };
 
 /**
- * This function gets the location of concerts
+ * This function connects to the SongKick API to find the name of the concert and url dates
  * @async
- * @param {string} id - Name of the artist you want to find concerts for
- * @param {string} apiKey - API key
+ * @param {string} is - The artist that is featured or a part of the concert that is being searched for
+ * @param {string} key - API key
  * @requires request
  */
+
 var getConcerts = (id, apiKey) => {
     return new Promise((resolve,reject) => {
         request({
