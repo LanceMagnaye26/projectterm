@@ -83,8 +83,8 @@ var writeFile = (usersArr) => {
  * @param {array} userArr - The first password entered in the form
  * @param {string} pass2 - Supposed to be the same as the first pass
  */
-var addUser = (usersArr, username, password, name, question, answer) => {
-	usersArr = loadFile();
+var addUser = (username, password, name, question, answer) => {
+	var usersArr = loadFile();
 	usersArr[username] = {
 		name: name,
 		pass: password,

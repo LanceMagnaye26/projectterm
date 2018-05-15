@@ -112,7 +112,7 @@ app.post('/signup', (request, response) => {
 	if(todo.duplicateUsers(accounts,request.body.userLogin)==1) {
 		if(todo.passCheck(request.body.passLogin, request.body.passLogin2)==1) {
 			if(todo.passCheck(request.body.userAnswer, request.body.userAnswer2)==1) {
-				todo.addUser(accounts, request.body.userLogin, request.body.passLogin, request.body.userName, request.body.userQuestion, request.body.userAnswer);
+				todo.addUser(request.body.userLogin, request.body.passLogin, request.body.userName, request.body.userQuestion, request.body.userAnswer);
 				response.render('congratulations.hbs', {
 					title: 'Congratulations'
 				});
