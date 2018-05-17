@@ -12,10 +12,16 @@ test('tests if a user is added to file', () => {
     
   	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
         name: 	"Emmett"
+
   	}));
-});
+
 
 test('tests if the user account is unique', () => {
 	console.log('second one')
     expect(todo.duplicateUsers()).toReturn(0)
+});
+
+
+test('tests if artist does not exist in Songkick database', () => {
+	expect(todo.getConcerts()
 });

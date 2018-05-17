@@ -27,7 +27,34 @@ app.use(express.static(__dirname + '/views'));
 
 hbs.registerHelper('getCurrentYear', () => {
 	return new Date().getFullYear();
-})
+});
+
+hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
+
+app.get('/venues', (request, response) => {
+    todo.getArtistID("", 'aFVE4X3HUdTMjVLm').then((result) => {
+        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
+    }).then((result) => {
+        response.render('map.hbs', {
+            title: 'Maps',
+            events: result
+        })
+    })
+});
+
+app.post('/venues', (request, response) => {
+    todo.getArtistID(request.body.artist, 'aFVE4X3HUdTMjVLm').then((result) => {
+        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
+    }).then((result) => {
+        response.render('map.hbs', {
+            title: 'Maps',
+            events: result
+        })
+    })
+});
+
 
 app.get('/', (request, response) => {
 	todo.logoutCheck(accounts);
