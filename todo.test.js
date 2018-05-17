@@ -1,16 +1,21 @@
 const todo = require('./todo.js');
 
+var loadfile = Object.keys(todo.loadFile());
+
 beforeAll(() => {
     console.log('asd');
-    todo.addUser("dickmuncher@fortnite.com", 1, "Emmett", "answer", "mom");
+    todo.addUser("testemail@test.com", 1, "Emmett", "answer", "mom");
 });
 
 test('tests if a user is added to file', () => {
-    var thing = Object.keys(todo.loadFile());
-    var lastKey = thing[thing.length-1];
+    var lastKey = loadfile[loadfile.length-1];
     
   	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
         name: 	"Emmett"
   	}));
 });
 
+test('tests if the user account is unique', () => {
+	console.log('second one')
+    expect(todo.duplicateUsers()).toReturn(0)
+});
