@@ -11,6 +11,7 @@ test('tests if a user is added to file', () => {
     
   	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
         name: 	"Emmett"
+
   	}));
-});
+
 
