@@ -1,10 +1,20 @@
 const todo = require('./todo.js');
 
-
-test('tests if a user is added to file', () => {
-  	expect(todo.addUser("lancem26", 1234, "Lance", "lol?", "kek")).toEqual(expect.objectContaining({
-  		name: 	"Lance",
-  		pass: 	1234
-  	}));
+beforeAll(() => {
+    console.log('asd');
+    todo.addUser("dickmuncher@fortnite.com", 1, "Emmett", "answer", "mom");
 });
 
+test('tests if a user is added to file', () => {
+    var thing = Object.keys(todo.loadFile());
+    var lastKey = thing[thing.length-1];
+    
+  	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
+        name: 	"Emmett"
+
+  	}));
+
+
+test('tests if artist does not exist in Songkick database', () => {
+	expect(todo.getConcerts()
+});
