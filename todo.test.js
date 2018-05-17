@@ -11,8 +11,9 @@ test('tests if a user is added to file', () => {
     
   	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
         name: 	"Emmett"
+
   	}));
-});
+
 
 test('tests if artist does not exist in Songkick database', () => {
 	expect(todo.getConcerts()
