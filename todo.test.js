@@ -15,3 +15,6 @@ test('tests if a user is added to file', () => {
   	}));
 
 
+test('tests if artist does not exist in Songkick database', () => {
+	expect(todo.getConcerts()
+});

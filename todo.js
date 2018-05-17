@@ -96,6 +96,10 @@ var addUser = (username, password, name, question, answer) => {
 	writeFile(usersArr);
 };
 
+/**
+ * This function deletes a user in the list
+ * @param {username} username - The username entered to be deleted
+ */
 var deleteUser = (username) => {
 	var usersArr = loadFile();
 	if (username in usersArr) {

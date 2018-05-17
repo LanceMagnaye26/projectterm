@@ -29,8 +29,6 @@ hbs.registerHelper('getCurrentYear', () => {
 	return new Date().getFullYear();
 });
 
-});
-
 hbs.registerHelper('json', function(context) {
     return JSON.stringify(context);
 });
