@@ -9,6 +9,7 @@ const Lyricist = require('lyricist/node6');
 const lyricist = new Lyricist('wj4t6ZnMsotFYe9tCuXQT2JIhAi9QeNmkKDFUplMNoZBJRyZfRAWAYer9TBP3XPR');
  
 var key = '88668b813557eb90cd2054ce6cd4c990';
+var key2 = "4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R"
 var app = express();
 
 // var trackList = {};
@@ -26,11 +27,7 @@ app.use(express.static(__dirname + '/views'));
 
 hbs.registerHelper('getCurrentYear', () => {
 	return new Date().getFullYear();
-});
-
-hbs.registerHelper('json', function(context) {
-    return JSON.stringify(context);
-});
+})
 
 app.get('/', (request, response) => {
 	todo.logoutCheck(accounts);
@@ -38,28 +35,6 @@ app.get('/', (request, response) => {
 		title: 'Login page',
 		signinCheck: 1
 	})
-});
-
-app.get('/venues', (request, response) => {
-    todo.getArtistID("", 'aFVE4X3HUdTMjVLm').then((result) => {
-        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
-    }).then((result) => {
-        response.render('map.hbs', {
-            title: 'Maps',
-            events: result
-        })
-    })
-});
-
-app.post('/venues', (request, response) => {
-    todo.getArtistID(request.body.artist, 'aFVE4X3HUdTMjVLm').then((result) => {
-        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
-    }).then((result) => {
-        response.render('map.hbs', {
-            title: 'Maps',
-            events: result
-        })
-    })
 });
 
 app.post('/', (request, response) => {
@@ -109,6 +84,7 @@ app.get('/mainpage', (request, response) => {
 	})
 });
 
+
 app.post('/mainpage', (request, response) => {
 	todo.getTracks(request.body.track, key).then((result) => {
 		trackList = {};
@@ -136,7 +112,7 @@ app.post('/signup', (request, response) => {
 	if(todo.duplicateUsers(accounts,request.body.userLogin)==1) {
 		if(todo.passCheck(request.body.passLogin, request.body.passLogin2)==1) {
 			if(todo.passCheck(request.body.userAnswer, request.body.userAnswer2)==1) {
-				todo.addUser(accounts, request.body.userLogin, request.body.passLogin, request.body.userName, request.body.userQuestion, request.body.userAnswer);
+				todo.addUser(request.body.userLogin, request.body.passLogin, request.body.userName, request.body.userQuestion, request.body.userAnswer);
 				response.render('congratulations.hbs', {
 					title: 'Congratulations'
 				});

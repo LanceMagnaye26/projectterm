@@ -1,12 +1,16 @@
 const todo = require('./todo.js');
 
-beforeEach
-
+beforeAll(() => {
+    console.log('asd');
+    todo.addUser("dickmuncher@fortnite.com", 1, "Emmett", "answer", "mom");
+});
 
 test('tests if a user is added to file', () => {
-  	expect(todo.addUser("lancem26", 1234, "Lance", "lol?", "kek")).toEqual(expect.objectContaining({
-  		name: 	"Lance",
-  		pass: 	1234
+    var thing = Object.keys(todo.loadFile());
+    var lastKey = thing[thing.length-1];
+    
+  	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
+        name: 	"Emmett"
   	}));
 });
 
