@@ -114,11 +114,6 @@ app.get('/playlist', (request, response) => {
 	response.render('playlist.hbs', playlistObj)
 })
 
-	response.render('playlist.hbs', {
-		title: 'My Playlist'
-	})
-});
-
 
 
 app.get('/signup', (request, response) => {
