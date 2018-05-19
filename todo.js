@@ -348,5 +348,4 @@ var querySong = function(songName, artistName) {
 };
 
 
- 
 // FORMAT FOR SEARCH: searchForSong("lift yourself", "kanye west", true);

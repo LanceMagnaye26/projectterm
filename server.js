@@ -106,12 +106,15 @@ app.post('/lyrics', (request, response) => {
 });
 
 app.get('/playlist', (request, response) => {
+
 	playlistObj = {}
 	playlistObj.playlist = todo.showPlaylist(currUser)
 	playlistObj.title = 'My Playlist'
 	playlistObj.name = currName
 	response.render('playlist.hbs', playlistObj)
 })
+
+
 
 
 app.get('/signup', (request, response) => {
