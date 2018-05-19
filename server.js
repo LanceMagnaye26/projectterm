@@ -67,7 +67,7 @@ app.post('/venues', (request, response) => {
 });
 
 app.get('/', (request, response) => {
-	todo.logoutCheck(accounts);
+	todo.logoutCheck();
 	response.render('login.hbs', {
 		title: 'Login page',
 		signinCheck: 1
@@ -75,9 +75,9 @@ app.get('/', (request, response) => {
 });
 
 app.post('/', (request, response) => {
-	if (todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin) == 1) {
+	if (todo.loginCheck(request.body.userLogin, request.body.passLogin) == 1) {
 		global.currUser = request.body.userLogin;
-		global.currName = todo.getName(accounts, request.body.userLogin)
+		global.currName = todo.getName(request.body.userLogin)
 		response.render('mytracks.hbs', {
 			title: 'Main page',
 			name: currName
@@ -106,16 +106,12 @@ app.post('/lyrics', (request, response) => {
 });
 
 app.get('/playlist', (request, response) => {
-
 	playlistObj = {}
 	playlistObj.playlist = todo.showPlaylist(currUser)
 	playlistObj.title = 'My Playlist'
 	playlistObj.name = currName
 	response.render('playlist.hbs', playlistObj)
 })
-
-
-
 
 app.get('/signup', (request, response) => {
 	response.render('signup.hbs', {
@@ -143,7 +139,7 @@ app.post('/mainpage', (request, response) => {
 			}
 			trackList.playlist = bigArr;
 			trackList.name = currName
-			console.log(trackList)
+			// console.log(trackList)
 			response.render('mytracks.hbs', trackList)
 		}
 	}).catch((error) => {
@@ -152,12 +148,12 @@ app.post('/mainpage', (request, response) => {
 })
 
 app.post('/tracks', (request, response) => {
-	todo.addPlaylist(accounts, request.body.songName, request.body.artistName, request.body.image)
+	todo.addPlaylist(request.body.songName, request.body.artistName, request.body.image)
 })
 
 
 app.post('/signup', (request, response) => {
-	if(todo.duplicateUsers(accounts,request.body.userLogin)==1) {
+	if(todo.duplicateUsers(request.body.userLogin)==1) {
 		if(todo.passCheck(request.body.passLogin, request.body.passLogin2)==1) {
 			if(todo.passCheck(request.body.userAnswer, request.body.userAnswer2)==1) {
 				todo.addUser(request.body.userLogin, request.body.passLogin, request.body.userName, request.body.userQuestion, request.body.userAnswer);
