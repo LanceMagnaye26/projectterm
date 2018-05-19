@@ -12,8 +12,6 @@ var key = '88668b813557eb90cd2054ce6cd4c990';
 var key2 = '4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R';
 var app = express();
 
-var accounts = {};
-
 
 
 app.use(bodyParser.json())
