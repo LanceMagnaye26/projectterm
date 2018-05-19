@@ -3,12 +3,16 @@
     <head>
         <title>{{title}}</title>
         <link href="mytracksStyle.css" rel="stylesheet" type="text/css">
+        <link href="/partials/footer.css" rel="stylesheet" type="text/css">
     </head>
     
     
     <body>
         <div>Hi {{name}}</div>
-        
+
+        <div id="userLoginHeader">
+            <img id="logo" src="EventPlugLogo.png" />
+        </div>
         <form id="search" action="/mainpage" method="post">
             <input type="text" name="track" id="trackSearch" placeholder="Please enter a song">
             <input id="searchButton" type="submit" value="Search">
