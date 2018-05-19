@@ -4,7 +4,7 @@ const Lyricist = require('lyricist/node6');
 const lyricist = new Lyricist('wj4t6ZnMsotFYe9tCuXQT2JIhAi9QeNmkKDFUplMNoZBJRyZfRAWAYer9TBP3XPR');
 
 /**
- * This function loads the 'accounts.json' file
+ * This function loads the 'accounts.json' file - contains information on all the registered accounts
  * @author EventPlug
  * @version 2.0
  */
@@ -21,12 +21,11 @@ var loadFile = () => {
 };
 
 /**
- * This function checks if the account signing up is already contained in the file
- * @param {array} usersArr - List of users in the 'accounts.json' file
+ * This function checks if the username is already contained in the database
  * @param {string} username - The username that gets checked for duplicates
  */
-var duplicateUsers = (usersArr, username) => {
-	usersArr = loadFile();
+var duplicateUsers = (username) => {
+	var usersArr = loadFile();
 	if (username in usersArr) {
 		return 0
 	}else {
@@ -35,13 +34,12 @@ var duplicateUsers = (usersArr, username) => {
 };
 
 /**
- * This function checks if the supplied account and password match
- * @param {array} usersArr - List of users in the 'accounts.json' file
- * @param {string} username - List of users in the 'accounts.json' file
- * @param {string} password - The username that gets checked for duplicates
+ * This function checks if the provided account and password match in the database
+ * @param {string} username - The username provided by the user to get checked
+ * @param {string} password - The password provided by the user to get checked
  */
-var loginCheck = (usersArr, username, password) => {
-	usersArr = loadFile();
+var loginCheck = (username, password) => {
+	var usersArr = loadFile();
 	if(username in usersArr) {
 		if(password == usersArr[username].pass) {
 			usersArr[username].loggedin = 'yes'
@@ -57,7 +55,7 @@ var loginCheck = (usersArr, username, password) => {
 
 
 /**
- * This function makes sure that the user has entered the password
+ * This function makes sure that the user has entered the password correctly when signing up
  * @param {string} pass1 - The first password entered in the form
  * @param {string} pass2 - Supposed to be the same as the first pass
  */
@@ -71,7 +69,7 @@ var passCheck = (pass1, pass2) => {
 
 
 /**
- * This function just creates the 'accounts.json' file
+ * This function just writes to the 'accounts.json' file
  * @param {array} usersArr - The list of accounts that will be written to the json
  */
 var writeFile = (usersArr) => {
@@ -79,9 +77,12 @@ var writeFile = (usersArr) => {
 };
 
 /**
- * This function adds a user to the list
- * @param {array} userArr - The array that contains all the registered users
+ * This function adds a user to the database when they have completed the sign up process
+ * @param {string} username - The username (or email) provided by the user
  * @param {string} password - The first password entered in the form
+ * @param {string} name - The name of the user
+ * @param {string} question - The security question chosen by the user during the sign up process
+ * @param {string} answer - The answer to the security question from above
  */
 var addUser = (username, password, name, question, answer) => {
 	var usersArr = loadFile();
@@ -97,7 +98,7 @@ var addUser = (username, password, name, question, answer) => {
 };
 
 /**
- * This function deletes a user in the list
+ * This function deletes a user from the database
  * @param {username} username - The username entered to be deleted
  */
 var deleteUser = (username) => {
@@ -105,7 +106,7 @@ var deleteUser = (username) => {
 	if (username in usersArr) {
 		delete usersArr[username];
 	} else {
-		return False;
+    return false;
 	}
 };
 
@@ -150,16 +151,16 @@ var getTracks = (trackName, key) => {
       		} 
     	});
   	});
-};	
+};
+
 
 /**
- * This function connects to the SongKick API to find the name of the concert and url dates
+ * This function connects to the songkick API to get the concerts' locations using the id of the artist obtained from getArtistID()
  * @async
- * @param {string} is - The artist that is featured or a part of the concert that is being searched for
+ * @param {string} id - id of the artist
  * @param {string} key - API key
  * @requires request
  */
-
 var getConcerts = (id, apiKey) => {
     return new Promise((resolve,reject) => {
         request({
@@ -223,10 +224,9 @@ var getArtistID = (artist, apiKey) => {
 
 /**
  * This function changes the loggedin value to "no" when you log out.
- * @param {array} usersArr - The array that contains all the registered users
  */
-var logoutCheck = (usersArr, currUser) => {
-	usersArr = loadFile();
+var logoutCheck = () => {
+	var usersArr = loadFile();
 	// console.log(currUser)
 	// if (usersArr[currUser] in usersArr) {
 	// 	console.log('first')
@@ -245,12 +245,13 @@ var logoutCheck = (usersArr, currUser) => {
 
 /**
  * This function adds songs into a playlist contained in each users' property
- * @param {string} usersArr - The array that contains all the registered users
  * @param {string} song - Name of the song that will be added to your playlist
+ * @param {string} artist - Name of the artist that will be added to your playlist
+ * @param {string} image - The image source
  */
-var addPlaylist = (usersArr, song, artist, image) => {
+var addPlaylist = (song, artist, image) => {
 	var checker = 1
-	usersArr = loadFile();
+	var usersArr = loadFile();
 	for (var user in usersArr) {
 		if(usersArr[user].loggedin == "yes") {
 			var newObj = {}
@@ -275,6 +276,11 @@ var addPlaylist = (usersArr, song, artist, image) => {
 	return checker
 };
 
+/**
+ * This function returns the lyrics of the song
+ * @param {string} songName - Name of the song 
+ * @param {string} artistName - Name of the artist
+ */
 var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed artistName to have a default of "", so we can do searchForSong(songName);
     return new Promise((resolve,reject) => {
         querySong(songName, artistName).then((song) => {
@@ -282,9 +288,9 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
                 reject("Cannot find song");
             }
 
-            console.log("Song Name: " + song.title);
-            console.log("Song ID: " + song.id);
-            console.log("Song Artist:" + song.primary_artist.name);
+            // console.log("Song Name: " + song.title);
+            // console.log("Song ID: " + song.id);
+            // console.log("Song Artist:" + song.primary_artist.name);
 
             if (fetchLyrics) {
                 lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
@@ -295,8 +301,12 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
     })
 };
 
-var getName = (usersArr, email) => {
-	usersArr = loadFile();
+/**
+ * This function takes in the username of the user and returns the name of the user
+ * @param {string} email - The username of the user
+ */
+var getName = (email) => {
+	var usersArr = loadFile();
 	for (var user in usersArr) {
 		if (usersArr[user].loggedin == "yes") {
 			if (user == email) {
@@ -306,6 +316,10 @@ var getName = (usersArr, email) => {
 	}
 }
 
+/**
+ * This function takes in the username of the user and returns playlist of that user
+ * @param {string} user - The username of the user
+ */
 var showPlaylist = (user) => {
 	var usersArr = loadFile();
 	return usersArr[user].playlist
@@ -334,8 +348,11 @@ module.exports = {
     showPlaylist
 };
 
-//lyric program
-var querySong = function(songName, artistName) {
+/**
+ * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
+ * @param {string} songName - Name of the song the user wants to search up
+ * @param {string} artistName - Name of the artist that makes the song
+ */var querySong = function(songName, artistName) {
   return new Promise(function(resolve, reject) {
     lyricist.search(songName).then((results) => { // results is the array of the returned search results
       results.some((song, index, _arr) => { // Loop through the idvidual songs
@@ -355,5 +372,4 @@ var querySong = function(songName, artistName) {
 };
 
 
- 
 // FORMAT FOR SEARCH: searchForSong("lift yourself", "kanye west", true);
