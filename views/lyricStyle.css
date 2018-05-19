@@ -1,0 +1,14 @@
+#Lyrics{
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 80%;
+    white-space: pre-wrap;
+    margin: auto;
+    text-align: center;
+}
+
+body{
+    width: 100%;
+    font-family: "Comic Sans MS";
+}
