@@ -157,14 +157,7 @@ var getConcerts = (id, apiKey) => {
             url: `http://api.songkick.com/api/3.0/artists/${id}/calendar.json?apikey=${apiKey}`,
             json: true
         }, (error, response, body) => {
-            if (error) {
-                reject('Cannot connect to Songkick API');
-                console.log(error);
-            }else if (body.resultsPage.totalEntries == 0) {
-                resolve({
-                    error : 'Concert not Found'
-                });
-            }else {
+            if (body.resultsPage.totalEntries != 0) {
                 var concertlist = [];
                 var concertThing = {};
                 var innerConcert = {};
@@ -178,6 +171,9 @@ var getConcerts = (id, apiKey) => {
                     };
                 }
                 resolve(concertThing);
+
+            } else {
+                reject('Concert Not Found');
                 // resolve({
                 //     uri: body.resultsPage.results.artist[0]['uri'],
                 //     id: body.resultsPage.results.artist[0]['id']
@@ -203,10 +199,8 @@ var getArtistID = (artist, apiKey) => {
             if (error) {
                 reject('Cannot connect to Songkick API');
                 console.log(error);
-            }else if (body.resultsPage.results == undefined) {
-                resolve({
-                    error : 'Artist Not Found'
-                });
+            }else if (body.resultsPage.totalEntries == 0) {
+                reject(1);
             }else {
                 resolve({
                     uri: body.resultsPage.results.artist[0]['uri'],

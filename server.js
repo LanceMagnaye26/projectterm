@@ -34,14 +34,9 @@ hbs.registerHelper('json', function(context) {
 });
 
 app.get('/venues', (request, response) => {
-    todo.getArtistID("", 'aFVE4X3HUdTMjVLm').then((result) => {
-        return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
-    }).then((result) => {
-        response.render('map.hbs', {
-            title: 'Maps',
-            events: result
-        })
-    })
+	response.render('map.hbs', {
+		title: 'Maps'
+	})
 });
 
 app.post('/venues', (request, response) => {
@@ -50,8 +45,24 @@ app.post('/venues', (request, response) => {
     }).then((result) => {
         response.render('map.hbs', {
             title: 'Maps',
-            events: result
+            events: result,
+            error: 0
         })
+    }).catch((error) => {
+        if (error == 1){
+            response.render('map.hbs', {
+                title: 'Artist Not Found',
+                events: 'failure',
+                error: 1
+            })
+        } else {
+            response.render('map.hbs', {
+                title: 'Concert Not Found',
+                events: 'failure',
+                error: 2
+            })
+        }
+
     })
 });
 
