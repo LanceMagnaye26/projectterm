@@ -80,8 +80,8 @@ var writeFile = (usersArr) => {
 
 /**
  * This function adds a user to the list
- * @param {array} userArr - The first password entered in the form
- * @param {string} pass2 - Supposed to be the same as the first pass
+ * @param {array} userArr - The array that contains all the registered users
+ * @param {string} password - The first password entered in the form
  */
 var addUser = (username, password, name, question, answer) => {
 	var usersArr = loadFile();
@@ -117,31 +117,40 @@ var deleteUser = (username) => {
  * @requires request
  */
 var getTracks = (trackName, key) => {
-  return new Promise((resolve,reject) => {
-    request({
-      url: `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${encodeURIComponent(trackName)}&api_key=${key}&format=json&limit=10`,
-      json: true
-    }, (error, response, body) => {
-      if (error) {
-      	reject('Cannot connect to LastFM API');
-      	console.log(error);
-      }else if (body.results['opensearch:totalResults'] == 0) {
-      	resolve({
-      		Error: 'Could not find song'
-      	});
-      }else {
-      	var trackObject = {};
-      	for (var i = 0; i < body.results.trackmatches.track.length; i++) {
-      		trackObject[body.results.trackmatches.track[i].artist] = {
-      			songTitle: body.results.trackmatches.track[i].name,
-      			img: body.results.trackmatches.track[i].image[2]['#text']
-      		}
-      	}
-        resolve(trackObject);
-      } 
-    });
-  });
-};
+	return new Promise((resolve,reject) => {
+		request({
+      		url: `http://ws.audioscrobbler.com/2.0/?method=track.search&track=${encodeURIComponent(trackName)}&api_key=${key}&format=json&limit=100`,
+      		json: true
+    	}, (error, response, body) => {
+      		if (error) {
+      			reject('Cannot connect to LastFM API');
+      			console.log(error);
+      		}else if (Object.keys(body).length == 0) {
+      			resolve({
+      				Error: 'Could not find song'
+      			});
+      		}else if (body.results.trackmatches.track.length == 0) {
+      			resolve({
+      				Error: 'Could not find song'
+      			});
+      		}else {
+      			var trackObject = {};
+      			for (var i = 0; i < body.results.trackmatches.track.length; i++) {
+      				if (body.results.trackmatches.track[i].image[2]['#text'] != '') {
+      					var image = body.results.trackmatches.track[i].image[2]['#text']
+      				}else {
+      					var image = 'data:image/jpeg;base64,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'
+      				}
+  					trackObject[body.results.trackmatches.track[i].artist] = {
+  						songTitle: body.results.trackmatches.track[i].name,
+  						img: image
+  					}
+  				}
+	        	resolve(trackObject);
+      		} 
+    	});
+  	});
+};	
 
 /**
  * This function connects to the SongKick API to find the name of the concert and url dates
@@ -216,8 +225,16 @@ var getArtistID = (artist, apiKey) => {
  * This function changes the loggedin value to "no" when you log out.
  * @param {array} usersArr - The array that contains all the registered users
  */
-var logoutCheck = (usersArr) => {
+var logoutCheck = (usersArr, currUser) => {
 	usersArr = loadFile();
+	// console.log(currUser)
+	// if (usersArr[currUser] in usersArr) {
+	// 	console.log('first')
+	// 	if (usersArr[currUser].loggedin == "yes") {
+	// 		console.log('second')
+	// 		usersArr[currUser].loggedin == "no"
+	// 	}
+	// }
 	for (var user in Object.keys(usersArr)) {
 		if(Object.values(usersArr)[user].loggedin == "yes") {
 			Object.values(usersArr)[user].loggedin = "no";
@@ -234,14 +251,24 @@ var logoutCheck = (usersArr) => {
 var addPlaylist = (usersArr, song, artist, image) => {
 	var checker = 1
 	usersArr = loadFile();
-	for (var user in Object.keys(usersArr)) {
-		if(Object.values(usersArr)[user].loggedin == "yes") {
-			if (Object.values(usersArr)[user].playlist.includes(song)) {
-				checker = 0
-			}else {
-				var newObj = {song: {"artist":artist, "image":image}}
-				Object.values(usersArr)[user].playlist.push(newObj);
-			}
+	for (var user in usersArr) {
+		if(usersArr[user].loggedin == "yes") {
+			var newObj = {}
+			newObj.song = song
+			newObj.artist = artist
+	 		newObj.image = image
+	 		if (usersArr[user].playlist.length != 0) {
+	 			for (var i = 0; i < usersArr[user].playlist.length; i++) {
+	 				if (usersArr[user].playlist[i].song == song) {
+						checker = 0
+					}
+	 			}
+	 			if (checker == 1) {
+	 				usersArr[user].playlist.push(newObj);
+	 			}
+	 		}else {
+	 			usersArr[user].playlist.push(newObj);
+	 		}
 		}
 	}
 	writeFile(usersArr);
@@ -268,6 +295,22 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
     })
 };
 
+var getName = (usersArr, email) => {
+	usersArr = loadFile();
+	for (var user in usersArr) {
+		if (usersArr[user].loggedin == "yes") {
+			if (user == email) {
+				return usersArr[user].name
+			}
+		}
+	}
+}
+
+var showPlaylist = (user) => {
+	var usersArr = loadFile();
+	return usersArr[user].playlist
+}
+
 /**
  * We can use these functions in another file now.
  * @type {{loadFile: loadFile, writeFile: writeFile, addUser: addUser, passCheck: passCheck, duplicateUsers: duplicateUsers, loginCheck: loginCheck, getTracks: (function(string, string): Promise<any>), logoutCheck: logoutCheck, addPlaylist: addPlaylist}}
@@ -286,7 +329,9 @@ module.exports = {
     getTracks,
     getConcerts,
     getArtistID,
-    searchForSong
+    searchForSong, 
+    getName, 
+    showPlaylist
 };
 
 //lyric program

@@ -9,10 +9,8 @@ const Lyricist = require('lyricist/node6');
 const lyricist = new Lyricist('wj4t6ZnMsotFYe9tCuXQT2JIhAi9QeNmkKDFUplMNoZBJRyZfRAWAYer9TBP3XPR');
  
 var key = '88668b813557eb90cd2054ce6cd4c990';
-var key2 = "4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R"
+var key2 = '4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R';
 var app = express();
-
-// var trackList = {};
 
 var accounts = {};
 
@@ -66,7 +64,6 @@ app.post('/venues', (request, response) => {
     })
 });
 
-
 app.get('/', (request, response) => {
 	todo.logoutCheck(accounts);
 	response.render('login.hbs', {
@@ -76,9 +73,12 @@ app.get('/', (request, response) => {
 });
 
 app.post('/', (request, response) => {
-	if ( todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin) == 1) {
-		response.render('mainpage.hbs', {
+	if (todo.loginCheck(accounts, request.body.userLogin, request.body.passLogin) == 1) {
+		global.currUser = request.body.userLogin;
+		global.currName = todo.getName(accounts, request.body.userLogin)
+		response.render('mytracks.hbs', {
 			title: 'Main page',
+			name: currName
 		})
 	}else {
 		response.render('login.hbs', {
@@ -104,10 +104,19 @@ app.post('/lyrics', (request, response) => {
 });
 
 app.get('/playlist', (request, response) => {
+
+	playlistObj = {}
+	playlistObj.playlist = todo.showPlaylist(currUser)
+	playlistObj.title = 'My Playlist'
+	playlistObj.name = currName
+	response.render('playlist.hbs', playlistObj)
+})
+
 	response.render('playlist.hbs', {
 		title: 'My Playlist'
 	})
 });
+
 
 
 app.get('/signup', (request, response) => {
@@ -116,24 +125,28 @@ app.get('/signup', (request, response) => {
 	})
 });
 
-app.get('/mainpage', (request, response) => {
-	response.render('mainpage.hbs', {
-		title: 'Track added!'
-	})
-});
 
 
 app.post('/mainpage', (request, response) => {
 	todo.getTracks(request.body.track, key).then((result) => {
 		trackList = {};
 		if('Error' in result) {
-			response.render('mainpage.hbs', result)
+			// result.search = 0
+			result.name = currName;
+			response.render('mytracks.hbs', result)
 		} else{
-			for (var i in Object.keys(result)) {
-				trackList[`songTitle${i}`] = Object.values(result)[i].songTitle
-				trackList[`artist${i}`] = Object.keys(result)[i]
-				trackList[`img${i}`] = Object.values(result)[i].img
+			var amount = Object.keys(result).length
+			var bigArr = [];
+			for (var artist in result) {
+				var smallObj = {}
+				smallObj.songTitle = result[artist].songTitle
+				smallObj.artist = artist
+				smallObj.image = result[artist].img
+				bigArr.push(smallObj)
 			}
+			trackList.playlist = bigArr;
+			trackList.name = currName
+			console.log(trackList)
 			response.render('mytracks.hbs', trackList)
 		}
 	}).catch((error) => {
@@ -142,7 +155,7 @@ app.post('/mainpage', (request, response) => {
 })
 
 app.post('/tracks', (request, response) => {
-	todo.addPlaylist(accounts, request.body.songName, request.body.artistName, request.body.imageName)
+	todo.addPlaylist(accounts, request.body.songName, request.body.artistName, request.body.image)
 })
 
 
