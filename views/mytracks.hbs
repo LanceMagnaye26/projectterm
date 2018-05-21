@@ -8,6 +8,8 @@
     
     
     <body>
+        <div>Hi {{name}}</div>
+
         <div id="userLoginHeader">
             <img id="logo" src="EventPlugLogo.png" />
         </div>
@@ -25,55 +27,28 @@
         </form>
         
         <div id="songList">
-            <form class="songForm" action="/tracks" method="post">
-                <h2 class="songTitle">{{songTitle0}}</h2>
-                <h3 class="artist">{{artist0}}</h3>
-                <img class="image" src="{{img0}}">
-                <br>
-                <input onclick="myFunction()" class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input class="invisible" type="hidden" name="songName" value="{{songTitle0}}">
-            </form>
-
-            <form class="songForm" action="/tracks" method="post">
-                <h2 class="songTitle">{{songTitle1}}</h2>
-                <h3 class="artist">{{artist1}}</h3>
-                <img class="image" src="{{img1}}">
-                <br>
-                <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input class="invisible" type="hidden" name="songName" value="{{songTitle1}}">
-            </form>
-
-            <form class="songForm" action="/tracks" method="post">
-                <h2 class="songTitle">{{songTitle2}}</h2>
-                <h3 class="artist">{{artist2}}</h3>
-                <img class="image" src="{{img2}}">
-                <br>
-                <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input class="invisible" type="hidden" name="songName" value="{{songTitle2}}">
-            </form>
-
-            <form class="songForm" action="/tracks" method="post">
-                <h2 class="songTitle">{{songTitle3}}</h2>
-                <h3 class="artist">{{artist3}}</h3>
-                <img class="image" src="{{img3}}">
-                <br>
-                <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input class="invisible" type="hidden" name="songName" value="{{songTitle3}}">
-            </form>
-
-            <form class="songForm" action="/tracks" method="post">
-                <h2 class="songTitle">{{songTitle4}}</h2>
-                <h3 class="artist">{{artist4}}</h3>
-                <img class="image" src="{{img4}}">
-                <br>
-                <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
-                <input class="invisible" type="hidden" name="songName" value="{{songTitle4}}">
-            </form>
-
-
+            {{#each playlist}}
+                <form class="songForm" action="/tracks" method="post">
+                    <h2 class="songTitle">
+                        {{songTitle}}
+                    </h2>
+                    <h3 class="artist">
+                        {{artist}}
+                    </h3>
+                    <img src="{{image}}" class="image">
+                    <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+                    <input type="hidden" name="songName" value="{{songTitle}}">
+                    <input type="hidden" name="artistName" value="{{artist}}">
+                    <input type="hidden" name="image" value="{{image}}">
+                </form>
+            {{/each}}
         </div>
         
         {{> footer}}
+        
+        <script>
+            
+        </script>
         
     </body>
 </html>

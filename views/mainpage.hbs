@@ -7,6 +7,8 @@
     </head>
     
     <body>
+        
+        <div>Hi {{name}}</div>
         <div id="userLoginHeader">
             <img id="logo" src="EventPlugLogo.png" />
         </div>
@@ -25,7 +27,11 @@
             <input id="logoutButton" type="submit" value="Log out">
         </form>
         
-        <h1>{{songTitle0}}</h1>
+        <form id="playlistForm" action="/playlist" method="get">
+            <input id="playlistButton" type="submit" value="Show my playlist">
+        </form>
+        
+        <h1>{{Error}}</h1>
         
         {{> footer}}
         
