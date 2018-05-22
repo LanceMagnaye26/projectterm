@@ -127,17 +127,17 @@
     top:10%;
 }
 
+#lyricsForm {
+    position:absolute;
+    right:1%;
+    top:15%;
+}
+
 #greet {
     position: absolute;
     top:1%;
     right:1.5%;
     margin-bottom: 1%;
-}
-
-#lyricsForm {
-    position:absolute;
-    right:1%;
-    top:15%;
 }
 
 /*
