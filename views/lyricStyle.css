@@ -39,7 +39,6 @@ body{
     cursor: pointer;
     display:inline-block;
     margin:5px;
-    
 }
 
 #submit:hover {
@@ -64,4 +63,9 @@ body{
 #search{
     position:relative;
 
+}
+
+body{
+    background-image: url('background.jpg');
+    color: white;
 }

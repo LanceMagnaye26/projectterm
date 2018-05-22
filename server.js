@@ -74,7 +74,14 @@ app.get('/', (request, response) => {
 	})
 });
 
-app.post('/', (request, response) => {
+app.get('/mainpage', (request,response) => {
+	response.render('mytracks.hbs', {
+		title: 'Main page',
+		name: currName
+	})
+})
+
+app.post('/mainpage', (request, response) => {
 	if (todo.loginCheck(request.body.userLogin, request.body.passLogin) == 1) {
 		global.currUser = request.body.userLogin;
 		global.currName = todo.getName(request.body.userLogin)
@@ -120,7 +127,7 @@ app.get('/signup', (request, response) => {
 });
 
 
-app.post('/mainpage', (request, response) => {
+app.post('/mytracks', (request, response) => {
 	todo.getTracks(request.body.track, key).then((result) => {
 		trackList = {};
 		if('Error' in result) {
