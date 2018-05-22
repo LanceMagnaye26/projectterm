@@ -208,14 +208,16 @@ var getArtistID = (artist, apiKey) => {
         }, (error, response, body) => {
             if (error) {
                 reject('Cannot connect to Songkick API');
-                console.log(error);
+
             }else if (body.resultsPage.totalEntries == 0) {
                 reject(1);
+
             }else {
                 resolve({
                     uri: body.resultsPage.results.artist[0]['uri'],
                     id: body.resultsPage.results.artist[0]['id']
                 });
+
             }
         });
     });
