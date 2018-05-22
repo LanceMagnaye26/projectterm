@@ -62,3 +62,8 @@ html, body {
     color:white;
     font-weight: 20px;
 }
+
+body{
+    background-image: url('background.jpg');
+    color: white;
+}
