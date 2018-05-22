@@ -39,18 +39,18 @@ var duplicateUsers = (username) => {
  * @param {string} password - The password provided by the user to get checked
  */
 var loginCheck = (username, password) => {
-	var usersArr = loadFile();
+  var usersArr = loadFile();
 	if(username in usersArr) {
-		if(password == usersArr[username].pass) {
-			usersArr[username].loggedin = 'yes'
-			writeFile(usersArr);
-			return 1
-		}else {
-			return 0
-		}
-	}else {
-		return 0
-	}
+      if(password == usersArr[username].pass) {
+        usersArr[username].loggedin = 'yes'
+        writeFile(usersArr);
+        return 1
+      }else {
+        return 0
+      }
+  }else {
+    return 0
+  }
 }
 
 
@@ -99,12 +99,13 @@ var addUser = (username, password, name, question, answer) => {
 
 /**
  * This function deletes a user from the database
- * @param {username} username - The username entered to be deleted
+ * @param {string} email - The key entered to be deleted
  */
-var deleteUser = (username) => {
+var deleteUser = (email) => {
 	var usersArr = loadFile();
-	if (username in usersArr) {
-		delete usersArr[username];
+	if (email in usersArr) {
+		delete usersArr[email];
+		writeFile(usersArr);
 	} else {
     return false;
 	}
@@ -147,6 +148,7 @@ var getTracks = (trackName, key) => {
   						img: image
   					}
   				}
+  				console.log(trackObject);
 	        	resolve(trackObject);
       		} 
     	});
@@ -208,14 +210,16 @@ var getArtistID = (artist, apiKey) => {
         }, (error, response, body) => {
             if (error) {
                 reject('Cannot connect to Songkick API');
-                console.log(error);
+
             }else if (body.resultsPage.totalEntries == 0) {
                 reject(1);
+
             }else {
                 resolve({
                     uri: body.resultsPage.results.artist[0]['uri'],
                     id: body.resultsPage.results.artist[0]['id']
                 });
+
             }
         });
     });
@@ -227,21 +231,13 @@ var getArtistID = (artist, apiKey) => {
  */
 var logoutCheck = () => {
 	var usersArr = loadFile();
-	// console.log(currUser)
-	// if (usersArr[currUser] in usersArr) {
-	// 	console.log('first')
-	// 	if (usersArr[currUser].loggedin == "yes") {
-	// 		console.log('second')
-	// 		usersArr[currUser].loggedin == "no"
-	// 	}
-	// }
 	for (var user in Object.keys(usersArr)) {
 		if(Object.values(usersArr)[user].loggedin == "yes") {
 			Object.values(usersArr)[user].loggedin = "no";
 		}
 	}
 	writeFile(usersArr);
-}
+};
 
 /**
  * This function adds songs into a playlist contained in each users' property
@@ -250,7 +246,7 @@ var logoutCheck = () => {
  * @param {string} image - The image source
  */
 var addPlaylist = (song, artist, image) => {
-	var checker = 1
+	var checker = 1;
 	var usersArr = loadFile();
 	for (var user in usersArr) {
 		if(usersArr[user].loggedin == "yes") {
@@ -308,7 +304,7 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
 var getName = (email) => {
 	var usersArr = loadFile();
 	for (var user in usersArr) {
-		if (usersArr[user].loggedin == "yes") {
+		if (usersArr[user].loggedin) {
 			if (user == email) {
 				return usersArr[user].name
 			}
@@ -323,7 +319,7 @@ var getName = (email) => {
 var showPlaylist = (user) => {
 	var usersArr = loadFile();
 	return usersArr[user].playlist
-}
+};
 
 /**
  * We can use these functions in another file now.
@@ -345,7 +341,8 @@ module.exports = {
     getArtistID,
     searchForSong, 
     getName, 
-    showPlaylist
+    showPlaylist,
+	deleteUser
 };
 
 /**

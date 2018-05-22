@@ -66,6 +66,20 @@
     bottom:0px;
     position: absolute;
     left:0px;
+    background-color:#8DCAFF; 
+    border: none;
+    color: white;
+    padding: 5px 60px;
+    text-decoration: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius:10px;
+}
+
+.addtoPlaylist:hover{
+    background-color:#083B66;
+    color:white;
 }
 
 #songList {
@@ -94,6 +108,12 @@
     right:1%;
     top:10%;
 }
+#logout {
+    position: absolute;
+    left:0.25%;
+    top:1%;
+}
+
 #logout {
     position: absolute;
     left:0.25%;
@@ -134,8 +154,17 @@
     right:1%;
     top:15%;
 }
+
 #addtoPlaylist {
     bottom:0px;
     position: absolute;
     left:0px;
 }
+
+#greet {
+    position: absolute;
+    top:1%;
+    right:1.5%;
+    margin-bottom: 1%;
+}
+
