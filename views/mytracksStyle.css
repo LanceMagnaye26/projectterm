@@ -89,53 +89,53 @@
     position:relative;
     outline: none;
 }
-#logoutButton {
-    background-color:#8DCAFF; 
-    border: none;
-    color: white;
-    padding: 5px 60px;
-    text-decoration: none;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    position:absolute;
-    top:5%;
-    right:1%;
-    border-radius:10px;
-}
-#logoutButton:hover {
-    background-color:#083B66;
-    color:white;
-}
-
-.invisible {
-    display:none;
-}
-
 #playlistForm {
     position:absolute;
     right:1%;
     top:10%;
 }
-#playlistButton{
+#logout {
+    position: absolute;
+    left:0.25%;
+    top:1%;
+}
+
+.buttons {
     background-color:#8DCAFF; 
     border: none;
-    font-family: sans-serif;
-    border-radius:10px;
     color: white;
     padding: 5px 60px;
     text-decoration: none;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    top:1%;
-    right:1%;  
+    border-radius:10px;
 }
-#playlistButton:hover {
+.buttons:hover {
     background-color:#083B66;
     color:white;
 }
-.addtoPlaylist{
-    margin-top:0%;
-    
+
+
+#playlistForm {
+    position:absolute;
+    right:1%;
+    top:5%;
+}
+
+#venuesForm {
+    position:absolute;
+    right:1%;
+    top:10%;
+}
+
+#lyricsForm {
+    position:absolute;
+    right:1%;
+    top:15%;
+}
+#addtoPlaylist {
+    bottom:0px;
+    position: absolute;
+    left:0px;
 }
