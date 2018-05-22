@@ -60,6 +60,20 @@
     bottom:0px;
     position: absolute;
     left:0px;
+    background-color:#8DCAFF; 
+    border: none;
+    color: white;
+    padding: 5px 60px;
+    text-decoration: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius:10px;
+}
+
+.addtoPlaylist:hover{
+    background-color:#083B66;
+    color:white;
 }
 
 
@@ -78,7 +92,6 @@
     width:40%;
 }
 
-<<<<<<< HEAD
 #logout {
     position: absolute;
     left:0.25%;
@@ -86,9 +99,6 @@
 }
 
 .buttons {
-=======
-#logoutButton {
->>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
     background-color:#8DCAFF; 
     border: none;
     color: white;
@@ -97,20 +107,9 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-<<<<<<< HEAD
     border-radius:10px;
 }
 .buttons:hover {
-=======
-    position:absolute;
-    top:1%;
-    right:1%;
-    border-radius:10px;
-}
-
-
-#logoutButton:hover {
->>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
     background-color:#083B66;
     color:white;
 }
@@ -128,13 +127,20 @@
     top:10%;
 }
 
-<<<<<<< HEAD
+#greet {
+    position: absolute;
+    top:1%;
+    right:1.5%;
+    margin-bottom: 1%;
+}
+
 #lyricsForm {
     position:absolute;
     right:1%;
     top:15%;
 }
 
+/*
 #playlistButton{
     background-color:#8DCAFF; 
     border: none;
@@ -151,17 +157,5 @@
 }
 #playlistButton:hover {
     background-color:#083B66;
-    color:white;
-=======
-#getConcert {
-    position:absolute;
-    right:10%;
-    top:10%;
->>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
-}
-
-#getLyrics {
-    position:absolute;
-    right:19%;
-    top:10%;
-}
+    color:white;   
+}*/
