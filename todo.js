@@ -285,7 +285,7 @@ var addPlaylist = (song, artist, image) => {
  * @param {string} songName - Name of the song 
  * @param {string} artistName - Name of the artist
  */
-var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed artistName to have a default of "", so we can do searchForSong(songName);
+var searchForSong = (songName, artistName="") => { // changed artistName to have a default of "", so we can do searchForSong(songName);
     return new Promise((resolve,reject) => {
         querySong(songName, artistName).then((song) => {
             if (song.id == 0) {
@@ -296,11 +296,11 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
             // console.log("Song ID: " + song.id);
             // console.log("Song Artist:" + song.primary_artist.name);
 
-            if (fetchLyrics) {
-                lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
-                    resolve(results.lyrics);
-                });
-            }
+
+			lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
+				resolve(results.lyrics);
+			});
+
         });
     })
 };
@@ -328,6 +328,29 @@ var showPlaylist = (user) => {
 	var usersArr = loadFile();
 	return usersArr[user].playlist
 };
+/**
+ * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
+ * @param {string} songName - Name of the song the user wants to search up
+ * @param {string} artistName - Name of the artist that makes the song
+ */var querySong = (songName, artistName) => {
+    return new Promise((resolve, reject) => {
+        lyricist.search(songName).then((results) => { // results is the array of the returned search results
+            results.some((song, index, _arr) => { // Loop through the idvidual songs
+                if(artistName == "") { // if the aristName wasn't provided in searchForSong
+                    console.log("No artist provided."); // Choosing random top song");
+                    //var randIdx = getRndInteger(0, results.length);
+                    //console.log("Index %d chosen", randIdx);
+                    //resolve(results[randIdx]);
+                    //return true;
+                }
+                else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
+                    resolve(song);
+                }
+            });
+        });
+    });
+};
+
 
 /**
  * We can use these functions in another file now.
@@ -350,31 +373,11 @@ module.exports = {
     searchForSong, 
     getName, 
     showPlaylist,
-	deleteUser
+	deleteUser,
+	querySong
 };
 
-/**
- * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
- * @param {string} songName - Name of the song the user wants to search up
- * @param {string} artistName - Name of the artist that makes the song
- */var querySong = function(songName, artistName) {
-  return new Promise(function(resolve, reject) {
-    lyricist.search(songName).then((results) => { // results is the array of the returned search results
-      results.some((song, index, _arr) => { // Loop through the idvidual songs
-        if(artistName == "") { // if the aristName wasn't provided in searchForSong
-          console.log("No artist provided."); // Choosing random top song");
-          //var randIdx = getRndInteger(0, results.length);
-          //console.log("Index %d chosen", randIdx);
-          //resolve(results[randIdx]);
-          //return true;
-        } 
-        else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
-          resolve(song);      
-        }
-    });
-  });
-});
-};
+
 
 
 // FORMAT FOR SEARCH: searchForSong("lift yourself", "kanye west", true);

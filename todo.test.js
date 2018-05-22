@@ -31,7 +31,23 @@ test('test if email is correctly being used as a key', () => {
 test('test if a track is searched', () => {
     expect.assertions(1);
     return todo.getTracks('Lucid Dream Juice', '88668b813557eb90cd2054ce6cd4c990').then(data => {
-        console.log(data['Juice WRLD']);
         expect(data['Juice WRLD'].songTitle).toBe("Lucid Dream (Forget Me)");
     })
 });
+
+test('tests querySong', () => {
+    expect.assertions(1);
+    return todo.querySong('Lift Yourself', 'Kanye West').then(data =>{
+        expect(data.id).not.toBe(0);
+    })
+
+})
+
+test('tests searchForSong', () => {
+    expect.assertions(1);
+    return todo.searchForSong('Lift Yourself', 'Kanye West').then(data =>{
+        expect(data).not.toBeNull();
+    })
+
+});
+
