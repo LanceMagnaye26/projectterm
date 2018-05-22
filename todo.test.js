@@ -33,9 +33,9 @@ test('tests if the confirm password input by user is the same as the first passw
 	expect(todo.passCheck(1,1)).toEqual(1)
 });
 
-test('tests if the user has been deleted from the database', () => {
-	expect(todo.deleteUser(1,1)).toEqual(1)
-});
+// test('tests if the user has been deleted from the database', () => {
+// 	expect(todo.deleteUser("",1)).toEqual(1)
+// });
 
 describe('check if the usernames already existed in the database', () => {
 	test('username already in database -> should return 0', () => {
