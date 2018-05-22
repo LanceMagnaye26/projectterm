@@ -47,6 +47,14 @@
 
 
 #logoutButton:hover {
+    background-color: grey;
+    color: white;
+}
+
+#playlistForm {
+    position:absolute;
+    right:5%;
+    top:5%;
     background-color:#083B66;
     color:white;
 }
@@ -64,5 +72,4 @@
     font-family: sans-serif;
     padding:3px;
     border-radius:5px;    
-    
 }

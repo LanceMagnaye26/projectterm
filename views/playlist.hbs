@@ -8,7 +8,19 @@
     
     <body>
         
-        
+        <div id="songList">
+            {{#each playlist}}
+                <div>
+                    <h2 class="songTitle">
+                        {{song}}
+                    </h2>
+                    <h3 class="artist">
+                        {{artist}}
+                    </h3>
+                    <img src="{{image}}" class="image">
+                </div>
+            {{/each}}
+        </div>
         
         {{> footer}}
 

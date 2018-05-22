@@ -3,3 +3,4 @@ package-lock.json
 .idea/
 projecterm.iml
 accounts.json
+yarn-error.log
