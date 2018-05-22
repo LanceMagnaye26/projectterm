@@ -8,7 +8,7 @@
     
     
     <body>
-        <div id="greet">Hi {{name}}</div>
+        <div>Hi {{name}}</div>
 
         <div id="userLoginHeader">
             <img id="logo" src="EventPlugLogo.png" />
@@ -26,12 +26,21 @@
             <input id="playlistButton" type="submit" value="Show my playlist">
         </form>
         
+<<<<<<< HEAD
         <form id="venuesForm" action="/venues" method="get">
             <input class="buttons" type="submit" value="Search for concerts">
         </form>
         
         <form id="lyricsForm" action="/lyrics" method="get">
             <input class="buttons" type="submit" value="Search for lyrics">
+=======
+        <form id="getConcert" action="/venues" method="get">
+            <input id="getConcertButton" type="submit" value="Show Concerts">
+        </form>
+        
+        <form id="getLyrics" action="/lyrics" method="get">
+            <input id="getLyricsButton" type="submit" value="Get Lyrics">
+>>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
         </form>
         
         <div id="songList">

@@ -11,8 +11,12 @@ afterAll(() => {
 
 test('tests if a user is added to file', () => {
     var thing = Object.keys(todo.loadFile());
-    var lastKey = thing[thing.length - 1];
+    var lastKey = thing[thing.length-1];
+    
+  	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
+        name: 	"Emmett"
 
+<<<<<<< HEAD
     expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
         name: "Emmett"
     }));
@@ -64,3 +68,10 @@ test('test if a track is searched', () => {
         expect(data['Juice WRLD'].songTitle).toBe("Lucid Dream (Forget Me)");
     })
 });
+=======
+  	}));
+
+
+test('tests if artist does not exist in Songkick database', () => {
+});
+>>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae

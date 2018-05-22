@@ -3,9 +3,9 @@
     bottom: 0%;
     top:20%;
     width: 100%;
-    height: 65%;
+    height: 70%;
     white-space: pre-wrap;
-    margin-top: 60px;
+    margin-top: 40px;
     margin-bottom: 100px;
     text-align: center;
     overflow-y: scroll;
@@ -39,6 +39,7 @@ body{
     cursor: pointer;
     display:inline-block;
     margin:5px;
+    left:40px;
     
 }
 
@@ -51,17 +52,16 @@ body{
     top:10%;
     bottom:0%;
     left:45%;
+    width:50px;
     height:50px;
     margin:30px;
 }
-.inputsd{
+.inputs{
+    width:50%;
+    height:10%;
     font-family: sans-serif;
     padding:3px;
     border-radius:5px;
     position:relative;
     outline: none;
-}
-#search{
-    position:relative;
-
 }

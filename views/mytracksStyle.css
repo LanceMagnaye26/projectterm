@@ -7,15 +7,9 @@
     position:relative;
     width:425px;
 }
-#greet{
-    position:absolute;
-    top:1%;
-    right:1.5%;
-    margin-bottom :1%;
-}
 #search {
     position:absolute;
-    left:8%;
+    left:15%;
     right:0px;
     top:15%;
     margin:auto;
@@ -57,8 +51,8 @@
 .songForm {
     position:relative;
     display:inline-block;
-    height:45%;
-    width:45%;
+    height:200px;
+    width:100%;
     margin-bottom: 10%;
 }
 
@@ -68,28 +62,23 @@
     left:0px;
 }
 
+
+#searchButton:hover {
+    background-color:#083B66;
+    color:white;
+}
+
 #songList {
-    position:fixed;
+    position:absolute;
     display:inline-block;
     left:0px;
     right:0px;
-    margin-top:1.5%;
-    margin-bottom:1.5%;
+    margin:auto;
     top:20%;
-    width:100%;
-    height:70%;
-    overflow-y: scroll;
-}
-#trackSearch{
-    width:50%;
-    height:30%;
-    font-family: sans-serif;
-    padding:3px;
-    border-radius:5px;
-    position:relative;
-    outline: none;
+    width:40%;
 }
 
+<<<<<<< HEAD
 #logout {
     position: absolute;
     left:0.25%;
@@ -97,6 +86,9 @@
 }
 
 .buttons {
+=======
+#logoutButton {
+>>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
     background-color:#8DCAFF; 
     border: none;
     color: white;
@@ -105,9 +97,20 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+<<<<<<< HEAD
     border-radius:10px;
 }
 .buttons:hover {
+=======
+    position:absolute;
+    top:1%;
+    right:1%;
+    border-radius:10px;
+}
+
+
+#logoutButton:hover {
+>>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
     background-color:#083B66;
     color:white;
 }
@@ -125,6 +128,7 @@
     top:10%;
 }
 
+<<<<<<< HEAD
 #lyricsForm {
     position:absolute;
     right:1%;
@@ -148,8 +152,16 @@
 #playlistButton:hover {
     background-color:#083B66;
     color:white;
+=======
+#getConcert {
+    position:absolute;
+    right:10%;
+    top:10%;
+>>>>>>> cb5712cf5653fbf0e853e3986475473f25d243ae
 }
-.addtoPlaylist{
-    margin-top:0%;
-    
+
+#getLyrics {
+    position:absolute;
+    right:19%;
+    top:10%;
 }
