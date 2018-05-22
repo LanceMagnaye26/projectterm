@@ -14,17 +14,25 @@
         <div id="userLoginHeader">
             <img id="logo" src="EventPlugLogo.png" />
         </div>
-        <form id="search" action="/mainpage" method="post">
+        <form id="search" action="/mytracks" method="post">
             <input type="text" name="track" id="trackSearch" placeholder="Please enter a song">
             <input id="searchButton" type="submit" value="Search">
         </form>
-        
-        <form action="/" method="get">
-            <input id="logoutButton" type="submit" value="Log out">
+
+        <form id="logout" action="/" method="get">
+            <input class="buttons" type="submit" value="Log out">
+        </form>
+
+        <form id="playlistForm" action="/playlist" method="get">
+            <input class="buttons" type="submit" value="Show my playlist">
         </form>
         
-        <form id="playlistForm" action="/playlist" method="get">
-            <input id="playlistButton" type="submit" value="Show my playlist">
+        <form id="venuesForm" action="/venues" method="get">
+            <input class="buttons" type="submit" value="Search for concerts">
+        </form>
+        
+        <form id="lyricsForm" action="/lyrics" method="get">
+            <input class="buttons" type="submit" value="Search for lyrics">
         </form>
         
         <div id="songList">
@@ -37,7 +45,7 @@
                         {{artist}}
                     </h3>
                     <img src="{{image}}" class="image">
-                    <input class="addtoPlaylist" type="submit" value="Add to playlist"/>
+                    <input id="addtoPlaylist" class="buttons" type="submit" value="Add to playlist"/>
                     <input type="hidden" name="songName" value="{{songTitle}}">
                     <input type="hidden" name="artistName" value="{{artist}}">
                     <input type="hidden" name="image" value="{{image}}">
