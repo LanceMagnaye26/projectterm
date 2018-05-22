@@ -13,7 +13,3 @@ test('tests if a user is added to file', () => {
         name: 	"Emmett"
 
   	}));
-
-
-test('tests if artist does not exist in Songkick database', () => {
-});
