@@ -18,12 +18,20 @@
             <input id="searchButton" type="submit" value="Search">
         </form>
         
-        <form action="/" method="get">
-            <input id="logoutButton" type="submit" value="Log out">
+        <form id="logout" action="/" method="get">
+            <input class="buttons" type="submit" value="Log out">
         </form>
         
         <form id="playlistForm" action="/playlist" method="get">
             <input id="playlistButton" type="submit" value="Show my playlist">
+        </form>
+        
+        <form id="venuesForm" action="/venues" method="get">
+            <input class="buttons" type="submit" value="Search for concerts">
+        </form>
+        
+        <form id="lyricsForm" action="/lyrics" method="get">
+            <input class="buttons" type="submit" value="Search for lyrics">
         </form>
         
         <div id="songList">

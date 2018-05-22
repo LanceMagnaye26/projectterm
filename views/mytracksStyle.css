@@ -89,7 +89,14 @@
     position:relative;
     outline: none;
 }
-#logoutButton {
+
+#logout {
+    position: absolute;
+    left:0.25%;
+    top:1%;
+}
+
+.buttons {
     background-color:#8DCAFF; 
     border: none;
     color: white;
@@ -98,25 +105,32 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    position:absolute;
-    top:5%;
-    right:1%;
     border-radius:10px;
 }
-#logoutButton:hover {
+.buttons:hover {
     background-color:#083B66;
     color:white;
 }
 
-.invisible {
-    display:none;
-}
 
 #playlistForm {
     position:absolute;
     right:1%;
+    top:5%;
+}
+
+#venuesForm {
+    position:absolute;
+    right:1%;
     top:10%;
 }
+
+#lyricsForm {
+    position:absolute;
+    right:1%;
+    top:15%;
+}
+
 #playlistButton{
     background-color:#8DCAFF; 
     border: none;
