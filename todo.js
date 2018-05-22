@@ -39,18 +39,18 @@ var duplicateUsers = (username) => {
  * @param {string} password - The password provided by the user to get checked
  */
 var loginCheck = (username, password) => {
-	var usersArr = loadFile();
+  var usersArr = loadFile();
 	if(username in usersArr) {
-		if(password == usersArr[username].pass) {
-			usersArr[username].loggedin = 'yes'
-			writeFile(usersArr);
-			return 1
-		}else {
-			return 0
-		}
-	}else {
-		return 0
-	}
+      if(password == usersArr[username].pass) {
+        usersArr[username].loggedin = 'yes'
+        writeFile(usersArr);
+        return 1
+      }else {
+        return 0
+      }
+  }else {
+    return 0
+  }
 }
 
 
@@ -227,14 +227,6 @@ var getArtistID = (artist, apiKey) => {
  */
 var logoutCheck = () => {
 	var usersArr = loadFile();
-	// console.log(currUser)
-	// if (usersArr[currUser] in usersArr) {
-	// 	console.log('first')
-	// 	if (usersArr[currUser].loggedin == "yes") {
-	// 		console.log('second')
-	// 		usersArr[currUser].loggedin == "no"
-	// 	}
-	// }
 	for (var user in Object.keys(usersArr)) {
 		if(Object.values(usersArr)[user].loggedin == "yes") {
 			Object.values(usersArr)[user].loggedin = "no";
