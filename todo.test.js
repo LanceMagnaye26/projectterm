@@ -7,9 +7,10 @@ beforeAll(() => {
 
 test('tests if a user is added to file', () => {
     var thing = Object.keys(todo.loadFile());
-    var lastKey = thing[thing.length-1];
-    
-  	expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
-        name: 	"Emmett"
+    var lastKey = thing[thing.length - 1];
 
-  	}));
+    expect(todo.loadFile()[`${lastKey}`]).toEqual(expect.objectContaining({
+        name: "Emmett"
+
+    }));
+});
