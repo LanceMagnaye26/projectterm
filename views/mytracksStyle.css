@@ -161,6 +161,17 @@
     left:0px;
 }
 
+.addtoPlaylist{
+    margin-top:0%;
+    
+}
+
+body{
+    background-image: url('background.jpg');
+    color: white;
+}
+
+
 #greet {
     position: absolute;
     top:1%;

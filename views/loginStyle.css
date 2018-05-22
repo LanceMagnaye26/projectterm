@@ -123,3 +123,8 @@
     position:relative;
     width:425px;
 }
+
+body{
+    background-image: url('background.jpg');
+    color: white;
+}

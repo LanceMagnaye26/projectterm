@@ -1,3 +1,8 @@
+
+body{
+    background-image: url('background.jpg');
+    color: white;
+
 #logo {
     display:block;
     margin:auto;
@@ -9,4 +14,5 @@
 }
 #songlist{
     display:inline-block; 
+
 }
