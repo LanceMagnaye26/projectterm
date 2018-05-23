@@ -148,7 +148,6 @@ var getTracks = (trackName, key) => {
   						img: image
   					}
   				}
-  				console.log(trackObject);
 	        	resolve(trackObject);
       		} 
     	});
@@ -283,10 +282,6 @@ var searchForSong = (songName, artistName="") => { // changed artistName to have
             if (song.id == 0) {
                 reject("Cannot find song");
             }
-
-            // console.log("Song Name: " + song.title);
-            // console.log("Song ID: " + song.id);
-            // console.log("Song Artist:" + song.primary_artist.name);
 
 
 			lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
