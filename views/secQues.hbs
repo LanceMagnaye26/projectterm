@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link href="secQuesStyle.css" rel="stylesheet" type="text/css">
+        <link href="/partials/footer.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    
+    <body>
+
+        <div id="userLoginHeader">
+            <a href="/"><img id="logo" src="EventPlugLogo.png" /></a>
+        </div>
+        
+        <form id="forgotForm" class="center" action="/question" method="post">
+            <h3 id="title">Please answer the security question</h3>
+            <h3 id="question">{{question}}</h3>
+            <input id="answer" name="userAnswer" class="center" type="text">
+            <input class="center"  id="submit" type="submit" value="Continue">
+        </form>
+        
+        {{> footer}}
+        
+        <script>
+            if ({{check}} == 0) {
+                alert("Incorrect answer for security question")
+            }
+        </script>
+
+    </body>
+</html>

@@ -16,13 +16,15 @@
             <img id="logo" src="EventPlugLogo.png" />
         </div>
         
+
         <form action="/mainpage" method="post" id="login">
             <input name="userLogin" class="userInp" id="username" type="email" placeholder="Email address or Username" required>
             <br/ >
             <input name="passLogin" class="userInp" id="password"  type="password" placeholder="Password" required>
             <input id="signinButton" type="submit" value="Sign In">
-            <p id="forgot">Forgot your username/password?</p>
+            <a href="/forgot"><p id="forgot">Forgot your username/password?</p></a>
         </form>
+
         
         {{> footer}}
         

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link href="forgotStyle.css" rel="stylesheet" type="text/css">
+        <link href="/partials/footer.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    
+    <body>
+
+        <div id="userLoginHeader">
+            <a href="/"><img id="logo" src="EventPlugLogo.png" /></a>
+        </div>
+        
+        <form id="forgotForm" class="center" action="/forgot" method="post">
+            <h3 id="title">Please type in your email</h3>
+            <input class="center" id="emailForgot" name="forgotEmail" type="email" placholder="Email" required>
+            <input class="center"  id="submit" type="submit" value="Continue">
+        </form>
+        
+        {{> footer}}
+        
+        <script>
+            if ({{check}} == 1){
+                alert("Incorrect email!")
+            };
+        </script>
+
+    </body>
+</html>
