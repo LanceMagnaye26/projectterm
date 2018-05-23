@@ -30,6 +30,7 @@
         <div id="fake"></div>
         
         <div id="songList">
+            <h2 id="error">{{Error}}</h2>
             {{#each playlist}}
                 <form class="songForm" action="/tracks" method="post">
                     <h2 class="songTitle">

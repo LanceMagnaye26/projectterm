@@ -56,6 +56,8 @@
     position:absolute;
     left:0%;
     top:0%;
+    width:174px;
+    height:174px;
 }
 
 .songForm {
@@ -201,5 +203,16 @@ body{
     top:1%;
     right:1.5%;
     margin-bottom: 1%;
+}
+
+#error {
+    position:absolute;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    top:0px;
+    margin:auto;
+    width:23vw;
+    height:5vh;
 }
 
