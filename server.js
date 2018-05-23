@@ -104,7 +104,7 @@ app.get('/lyrics', (request, response) => {
 });
 
 app.post('/lyrics', (request, response) => {
-    todo.searchForSong(request.body.title, request.body.artist, true).then((result) => {
+    todo.searchForSong(request.body.title, request.body.artist).then((result) => {
         response.render('lyrics.hbs', {
             title: 'Lyrics',
             lyrics: result

@@ -3,6 +3,7 @@ body{
     background-image: url('background.jpg');
     color: white;
 }
+
 #logo {
     display:block;
     margin:auto;
@@ -30,6 +31,7 @@ body{
     left:30%;
 }
 
+
 .artist {
     position: absolute;
     top:30%;
@@ -49,3 +51,4 @@ body{
     width:45%;
     margin-bottom: 10%;
 }
+
