@@ -22,18 +22,25 @@
         <form id="logout" action="/" method="get">
             <input class="buttons" type="submit" value="Log out">
         </form>
+        
+        <div id="menu">
+            <div id="menuBut">
+            </div>
+            <div id="menuHeader">
+                Menu
+            </div>
+            <form id="playlistForm" action="/playlist" method="get">
+                <input class="buttons2" type="submit" value="Show my playlist">
+            </form>
 
-        <form id="playlistForm" action="/playlist" method="get">
-            <input class="buttons" type="submit" value="Show my playlist">
-        </form>
-        
-        <form id="venuesForm" action="/venues" method="get">
-            <input class="buttons" type="submit" value="Search for concerts">
-        </form>
-        
-        <form id="lyricsForm" action="/lyrics" method="get">
-            <input class="buttons" type="submit" value="Search for lyrics">
-        </form>
+            <form id="venuesForm" action="/venues" method="get">
+                <input class="buttons2" type="submit" value="Search for concerts">
+            </form>
+
+            <form id="lyricsForm" action="/lyrics" method="get">
+                <input class="buttons2" type="submit" value="Search for lyrics">
+            </form>
+        </div>
         
         <div id="songList">
             {{#each playlist}}
@@ -43,7 +50,7 @@
                     </h2>
                     <h3 class="artist">
                         {{artist}}
-                    </h3>
+                    </h3>x
                     <img src="{{image}}" class="image">
                     <input id="addtoPlaylist" class="buttons" type="submit" value="Add to playlist"/>
                     <input type="hidden" name="songName" value="{{songTitle}}">

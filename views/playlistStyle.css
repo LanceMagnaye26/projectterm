@@ -2,7 +2,7 @@
 body{
     background-image: url('background.jpg');
     color: white;
-
+}
 #logo {
     display:block;
     margin:auto;
@@ -12,7 +12,40 @@ body{
     position:relative;
     width:425px;
 }
-#songlist{
-    display:inline-block; 
+#songList {
+    position:fixed;
+    display:inline-block;
+    left:0px;
+    right:0px;
+    margin-top:1.5%;
+    margin-bottom:1.5%;
+    top:20%;
+    width:100%;
+    height:70%;
+    overflow-y: scroll;
+}
+.songTitle {
+    position: absolute;
+    top:0%;
+    left:30%;
+}
 
+.artist {
+    position: absolute;
+    top:30%;
+    left:30%;
+}
+
+.image {
+    position:absolute;
+    left:0%;
+    top:0%;
+}
+
+.songForm {
+    position:relative;
+    display:inline-block;
+    height:45%;
+    width:45%;
+    margin-bottom: 10%;
 }
