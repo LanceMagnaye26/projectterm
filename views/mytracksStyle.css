@@ -40,12 +40,14 @@
     position: absolute;
     top:0%;
     left:30%;
+    color:#CACFD1;
 }
 
 .artist {
     position: absolute;
     top:30%;
     left:30%;
+    color:#FCFEFF;
 }
 
 .image {
@@ -108,11 +110,6 @@
     right:1%;
     top:10%;
 }
-#logout {
-    position: absolute;
-    left:0.25%;
-    top:1%;
-}
 
 #logout {
     position: absolute;
@@ -129,7 +126,7 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    width:100%;
+    width:28.7%;
 }
 .buttons:hover {
     background-color:#083B66;
@@ -219,7 +216,7 @@
 }
 
 #addtoPlaylist {
-    bottom:0px;
+    bottom:1.5px;
     position: absolute;
     left:0px;
 }
