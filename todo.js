@@ -320,6 +320,7 @@ var showPlaylist = (user) => {
 	var usersArr = loadFile();
 	return usersArr[user].playlist
 };
+
 /**
  * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
  * @param {string} songName - Name of the song the user wants to search up
