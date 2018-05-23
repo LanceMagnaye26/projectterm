@@ -91,7 +91,7 @@ var addUser = (username, password, name, question, answer) => {
 		pass: password,
 		playlist: [],
 		question: question,
-		answer: answer,
+		answer: answer.toLowerCase(),
 		loggedin: 'no'
 	}
 	writeFile(usersArr);
@@ -154,6 +154,37 @@ var getTracks = (trackName, key) => {
   	});
 };
 
+
+var getQues = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].question
+}
+
+var getAns = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].answer  
+}
+
+/**
+ * This function takes in the username of the user and returns the name of the user
+ * @param {string} email - The username of the user
+ */
+var getName = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].name  
+}
+
+var getPass = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].pass  
+}
+
+var checkQues = (email, answer) => {
+  usersArr = loadFile()
+  if (answer.toLowerCase() == usersArr[email].answer) {
+    return 1
+  }
+}
 
 /**
  * This function connects to the songkick API to get the concerts' locations using the id of the artist obtained from getArtistID()
@@ -292,20 +323,6 @@ var searchForSong = (songName, artistName="") => { // changed artistName to have
     })
 };
 
-/**
- * This function takes in the username of the user and returns the name of the user
- * @param {string} email - The username of the user
- */
-var getName = (email) => {
-	var usersArr = loadFile();
-	for (var user in usersArr) {
-		if (usersArr[user].loggedin) {
-			if (user == email) {
-				return usersArr[user].name
-			}
-		}
-	}
-}
 
 /**
  * This function takes in the username of the user and returns playlist of that user
@@ -346,23 +363,27 @@ var showPlaylist = (user) => {
  * @module exporting all the functions
  */
 module.exports = {
-    loadFile,
-    writeFile,
-    addUser,
-    passCheck,
-    duplicateUsers,
-    loginCheck,
-    getTracks,
-    logoutCheck,
-    addPlaylist,
-    getTracks,
-    getConcerts,
-    getArtistID,
-    searchForSong, 
-    getName, 
-    showPlaylist,
+  loadFile,
+  writeFile,
+  addUser,
+  passCheck,
+  duplicateUsers,
+  loginCheck,
+  getTracks,
+  logoutCheck,
+  addPlaylist,
+  getTracks,
+  getConcerts,
+  getArtistID,
+  searchForSong, 
+  getName, 
+  showPlaylist,
 	deleteUser,
-	querySong
+	querySong,
+  getQues,
+  checkQues,
+  getAns,
+  getPass
 };
 
 

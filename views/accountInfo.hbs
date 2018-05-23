@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+        <link href="accountInfoStyle.css" rel="stylesheet" type="text/css">
+        <link href="/partials/footer.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    
+    <body>
+
+        <div id="userLoginHeader">
+            <a href="/"><img id="logo" src="EventPlugLogo.png" /></a>
+        </div>
+        
+        <form id="forgotForm" class="center" action="/" method="get">
+            <h3 id="title">Here's your information!</h3>
+            <p id="name" class="headers">Name</p>
+            <p id="nameInfo" class="information">{{name}}</p>
+            <p id="username" class="headers">Username</p>
+            <p id="usernameInfo" class="information">{{username}}</p>
+            <p id="password" class="headers">Password</p>
+            <p id="passwordInfo" class="information">{{password}}</p>
+            <p id="question" class="headers">Security Question</p>
+            <p id="questionInfo" class="information">{{question}}</p>
+            <p id="answer" class="headers">Security Answer</p>
+            <p id="answerInfo" class="information">{{answer}}</p>
+            <input class="center"  id="submit" type="submit" value="Go to Login page">
+        </form>
+        
+        {{> footer}}
+
+    </body>
+</html>
