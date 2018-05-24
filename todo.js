@@ -91,7 +91,7 @@ var addUser = (username, password, name, question, answer) => {
 		pass: password,
 		playlist: [],
 		question: question,
-		answer: answer,
+		answer: answer.toLowerCase(),
 		loggedin: 'no'
 	}
 	writeFile(usersArr);
@@ -148,13 +148,56 @@ var getTracks = (trackName, key) => {
   						img: image
   					}
   				}
-  				console.log(trackObject);
 	        	resolve(trackObject);
       		} 
     	});
   	});
 };
 
+var getArtist = (artistName, key) => {
+  return new Promise((resolve,reject) => {
+    request({
+      url: `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(artistName)}&api_key=${key}&format=json&limit=100`,
+          json: true
+      }, (error, response, body) => {
+          if (error) {
+            reject('Cannot connect to LastFM API');
+            console.log(error);
+          }
+      })
+  })
+}
+
+var getQues = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].question
+}
+
+var getAns = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].answer  
+}
+
+/**
+ * This function takes in the username of the user and returns the name of the user
+ * @param {string} email - The username of the user
+ */
+var getName = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].name  
+}
+
+var getPass = (email) => {
+  usersArr = loadFile()
+  return usersArr[email].pass  
+}
+
+var checkQues = (email, answer) => {
+  usersArr = loadFile()
+  if (answer.toLowerCase() == usersArr[email].answer) {
+    return 1
+  }
+}
 
 /**
  * This function connects to the songkick API to get the concerts' locations using the id of the artist obtained from getArtistID()
@@ -280,37 +323,19 @@ var addPlaylist = (song, artist, image) => {
 var searchForSong = (songName, artistName="") => { // changed artistName to have a default of "", so we can do searchForSong(songName);
     return new Promise((resolve,reject) => {
         querySong(songName, artistName).then((song) => {
-            if (song.id == 0) {
-                reject("Cannot find song");
+            if (song.id != 0) {
+              lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
+                resolve(results.lyrics);
+              });
+            } else {
+              reject('Could not find lyrics');
             }
-
-            // console.log("Song Name: " + song.title);
-            // console.log("Song ID: " + song.id);
-            // console.log("Song Artist:" + song.primary_artist.name);
-
-
-			lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
-				resolve(results.lyrics);
-			});
-
-        });
+        }).catch((error) => {
+          reject('Could not find lyrics')
+        })
     })
 };
 
-/**
- * This function takes in the username of the user and returns the name of the user
- * @param {string} email - The username of the user
- */
-var getName = (email) => {
-	var usersArr = loadFile();
-	for (var user in usersArr) {
-		if (usersArr[user].loggedin) {
-			if (user == email) {
-				return usersArr[user].name
-			}
-		}
-	}
-}
 
 /**
  * This function takes in the username of the user and returns playlist of that user
@@ -318,30 +343,30 @@ var getName = (email) => {
  */
 var showPlaylist = (user) => {
 	var usersArr = loadFile();
-	return usersArr[user].playlist
+  if (usersArr[user].playlist.length == 0) {
+    return 'error'
+  } else {
+    return usersArr[user].playlist
+  }
 };
 
 /**
  * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
  * @param {string} songName - Name of the song the user wants to search up
  * @param {string} artistName - Name of the artist that makes the song
- */var querySong = (songName, artistName) => {
-    return new Promise((resolve, reject) => {
-        lyricist.search(songName).then((results) => { // results is the array of the returned search results
-            results.some((song, index, _arr) => { // Loop through the idvidual songs
-                if(artistName == "") { // if the aristName wasn't provided in searchForSong
-                    console.log("No artist provided."); // Choosing random top song");
-                    //var randIdx = getRndInteger(0, results.length);
-                    //console.log("Index %d chosen", randIdx);
-                    //resolve(results[randIdx]);
-                    //return true;
-                }
-                else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
-                    resolve(song);
-                }
-            });
-        });
-    });
+ */
+var querySong = (songName, artistName) => {
+  return new Promise((resolve, reject) => {
+      lyricist.search(songName).then((results) => {
+          results.some((song, index, _arr) => { 
+              if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
+                resolve(song);
+              }else {
+                reject('Inccorect artist name')
+              }
+          });
+      });
+  });
 };
 
 
@@ -351,23 +376,27 @@ var showPlaylist = (user) => {
  * @module exporting all the functions
  */
 module.exports = {
-    loadFile,
-    writeFile,
-    addUser,
-    passCheck,
-    duplicateUsers,
-    loginCheck,
-    getTracks,
-    logoutCheck,
-    addPlaylist,
-    getTracks,
-    getConcerts,
-    getArtistID,
-    searchForSong, 
-    getName, 
-    showPlaylist,
+  loadFile,
+  writeFile,
+  addUser,
+  passCheck,
+  duplicateUsers,
+  loginCheck,
+  getTracks,
+  logoutCheck,
+  addPlaylist,
+  getTracks,
+  getConcerts,
+  getArtistID,
+  searchForSong, 
+  getName, 
+  showPlaylist,
 	deleteUser,
-	querySong
+	querySong,
+  getQues,
+  checkQues,
+  getAns,
+  getPass
 };
 
 
