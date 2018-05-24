@@ -39,18 +39,18 @@ var duplicateUsers = (username) => {
  * @param {string} password - The password provided by the user to get checked
  */
 var loginCheck = (username, password) => {
-	var usersArr = loadFile();
+  var usersArr = loadFile();
 	if(username in usersArr) {
-		if(password == usersArr[username].pass) {
-			usersArr[username].loggedin = 'yes'
-			writeFile(usersArr);
-			return 1
-		}else {
-			return 0
-		}
-	}else {
-		return 0
-	}
+      if(password == usersArr[username].pass) {
+        usersArr[username].loggedin = 'yes'
+        writeFile(usersArr);
+        return 1
+      }else {
+        return 0
+      }
+  }else {
+    return 0
+  }
 }
 
 
@@ -99,12 +99,13 @@ var addUser = (username, password, name, question, answer) => {
 
 /**
  * This function deletes a user from the database
- * @param {username} username - The username entered to be deleted
+ * @param {string} email - The key entered to be deleted
  */
-var deleteUser = (username) => {
+var deleteUser = (email) => {
 	var usersArr = loadFile();
-	if (username in usersArr) {
-		delete usersArr[username];
+	if (email in usersArr) {
+		delete usersArr[email];
+		writeFile(usersArr);
 	} else {
     return false;
 	}
@@ -147,6 +148,7 @@ var getTracks = (trackName, key) => {
   						img: image
   					}
   				}
+  				console.log(trackObject);
 	        	resolve(trackObject);
       		} 
     	});
@@ -208,14 +210,16 @@ var getArtistID = (artist, apiKey) => {
         }, (error, response, body) => {
             if (error) {
                 reject('Cannot connect to Songkick API');
-                console.log(error);
+
             }else if (body.resultsPage.totalEntries == 0) {
                 reject(1);
+
             }else {
                 resolve({
                     uri: body.resultsPage.results.artist[0]['uri'],
                     id: body.resultsPage.results.artist[0]['id']
                 });
+
             }
         });
     });
@@ -227,21 +231,13 @@ var getArtistID = (artist, apiKey) => {
  */
 var logoutCheck = () => {
 	var usersArr = loadFile();
-	// console.log(currUser)
-	// if (usersArr[currUser] in usersArr) {
-	// 	console.log('first')
-	// 	if (usersArr[currUser].loggedin == "yes") {
-	// 		console.log('second')
-	// 		usersArr[currUser].loggedin == "no"
-	// 	}
-	// }
 	for (var user in Object.keys(usersArr)) {
 		if(Object.values(usersArr)[user].loggedin == "yes") {
 			Object.values(usersArr)[user].loggedin = "no";
 		}
 	}
 	writeFile(usersArr);
-}
+};
 
 /**
  * This function adds songs into a playlist contained in each users' property
@@ -250,7 +246,7 @@ var logoutCheck = () => {
  * @param {string} image - The image source
  */
 var addPlaylist = (song, artist, image) => {
-	var checker = 1
+	var checker = 1;
 	var usersArr = loadFile();
 	for (var user in usersArr) {
 		if(usersArr[user].loggedin == "yes") {
@@ -281,7 +277,7 @@ var addPlaylist = (song, artist, image) => {
  * @param {string} songName - Name of the song 
  * @param {string} artistName - Name of the artist
  */
-var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed artistName to have a default of "", so we can do searchForSong(songName);
+var searchForSong = (songName, artistName="") => { // changed artistName to have a default of "", so we can do searchForSong(songName);
     return new Promise((resolve,reject) => {
         querySong(songName, artistName).then((song) => {
             if (song.id == 0) {
@@ -292,11 +288,11 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
             // console.log("Song ID: " + song.id);
             // console.log("Song Artist:" + song.primary_artist.name);
 
-            if (fetchLyrics) {
-                lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
-                    resolve(results.lyrics);
-                });
-            }
+
+			lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
+				resolve(results.lyrics);
+			});
+
         });
     })
 };
@@ -308,7 +304,7 @@ var searchForSong = (songName, artistName="", fetchLyrics=false) => { // changed
 var getName = (email) => {
 	var usersArr = loadFile();
 	for (var user in usersArr) {
-		if (usersArr[user].loggedin == "yes") {
+		if (usersArr[user].loggedin) {
 			if (user == email) {
 				return usersArr[user].name
 			}
@@ -323,7 +319,31 @@ var getName = (email) => {
 var showPlaylist = (user) => {
 	var usersArr = loadFile();
 	return usersArr[user].playlist
-}
+};
+
+/**
+ * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
+ * @param {string} songName - Name of the song the user wants to search up
+ * @param {string} artistName - Name of the artist that makes the song
+ */var querySong = (songName, artistName) => {
+    return new Promise((resolve, reject) => {
+        lyricist.search(songName).then((results) => { // results is the array of the returned search results
+            results.some((song, index, _arr) => { // Loop through the idvidual songs
+                if(artistName == "") { // if the aristName wasn't provided in searchForSong
+                    console.log("No artist provided."); // Choosing random top song");
+                    //var randIdx = getRndInteger(0, results.length);
+                    //console.log("Index %d chosen", randIdx);
+                    //resolve(results[randIdx]);
+                    //return true;
+                }
+                else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
+                    resolve(song);
+                }
+            });
+        });
+    });
+};
+
 
 /**
  * We can use these functions in another file now.
@@ -345,31 +365,12 @@ module.exports = {
     getArtistID,
     searchForSong, 
     getName, 
-    showPlaylist
+    showPlaylist,
+	deleteUser,
+	querySong
 };
 
-/**
- * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
- * @param {string} songName - Name of the song the user wants to search up
- * @param {string} artistName - Name of the artist that makes the song
- */var querySong = function(songName, artistName) {
-  return new Promise(function(resolve, reject) {
-    lyricist.search(songName).then((results) => { // results is the array of the returned search results
-      results.some((song, index, _arr) => { // Loop through the idvidual songs
-        if(artistName == "") { // if the aristName wasn't provided in searchForSong
-          console.log("No artist provided."); // Choosing random top song");
-          //var randIdx = getRndInteger(0, results.length);
-          //console.log("Index %d chosen", randIdx);
-          //resolve(results[randIdx]);
-          //return true;
-        } 
-        else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
-          resolve(song);      
-        }
-    });
-  });
-});
-};
+
 
 
 // FORMAT FOR SEARCH: searchForSong("lift yourself", "kanye west", true);

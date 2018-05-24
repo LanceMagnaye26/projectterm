@@ -145,3 +145,8 @@
 #dropdown:hover .dropdown-content {
     display:block;
 }
+
+body{
+    background-image: url('background.jpg');
+    color: white;
+}

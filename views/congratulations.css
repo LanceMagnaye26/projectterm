@@ -63,4 +63,7 @@
 }
 
 
-
+body{
+    background-image: url('background.jpg');
+    color: white;
+}

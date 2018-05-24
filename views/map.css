@@ -4,6 +4,15 @@ html, body {
     margin: 0px;
     padding: 0px;
 }
+#logo {
+    display:block;
+    margin:auto;
+    top:0px;
+    left:0px;
+    right:0px;
+    position:relative;
+    width:425px;
+}
 
 #map {
     height: 80%;
@@ -61,4 +70,9 @@ html, body {
     background-color:#083B66;
     color:white;
     font-weight: 20px;
+}
+
+body{
+    background-image: url('background.jpg');
+    color: white;
 }
