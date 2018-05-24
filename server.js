@@ -56,6 +56,7 @@ app.post('/lyrics', (request, response) => {
 	        lyrics: result
 	    })
     }).catch((error) => {
+    	console.log('no no no')
     	response.render('lyrics.hbs', {
     		title: 'Lyrics not Found',
     		error: 'Could not find lyrics'
@@ -99,10 +100,7 @@ app.get('/', (request, response) => {
 });
 
 app.get('/mainpage', (request,response) => {
-	response.render('mytracks.hbs', {
-		title: 'Main page',
-		name: currName
-	})
+	response.render('mytracks.hbs', currSong)
 })
 
 app.post('/mainpage', (request, response) => {
@@ -208,6 +206,7 @@ app.post('/mytracks', (request, response) => {
 			}
 			trackList.playlist = bigArr;
 			trackList.name = currName
+			global.currSong = trackList
 			response.render('mytracks.hbs', trackList)
 		}
 	}).catch((error) => {
