@@ -154,6 +154,19 @@ var getTracks = (trackName, key) => {
   	});
 };
 
+var getArtist = (artistName, key) => {
+  return new Promise((resolve,reject) => {
+    request({
+      url: `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${encodeURIComponent(artistName)}&api_key=${key}&format=json&limit=100`,
+          json: true
+      }, (error, response, body) => {
+          if (error) {
+            reject('Cannot connect to LastFM API');
+            console.log(error);
+          }
+      })
+  })
+}
 
 var getQues = (email) => {
   usersArr = loadFile()

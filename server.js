@@ -13,7 +13,7 @@ var key2 = '4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R';
 var app = express();
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) 
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -100,7 +100,14 @@ app.get('/', (request, response) => {
 });
 
 app.get('/mainpage', (request,response) => {
-	response.render('mytracks.hbs', currSong)
+	if (typeof currSong == 'undefined') {
+		response.render('mytracks.hbs', {
+			title: 'Main page',
+			name: currName
+		})
+	}else {
+		response.render('mytracks.hbs', currSong)
+	}
 })
 
 app.post('/mainpage', (request, response) => {
