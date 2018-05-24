@@ -35,6 +35,20 @@ app.get('/venues', (request, response) => {
 	})
 });
 
+app.post('/lyrics', (request, response) => {
+    todo.searchForSong(request.body.title, request.body.artist).then((result) => {
+		response.render('lyrics.hbs', {
+	        title: 'Lyrics',
+	        lyrics: result
+	    })
+    }).catch((error) => {
+    	response.render('lyrics.hbs', {
+    		title: 'Lyrics not Found',
+    		error: 'Could not find lyrics'
+    	})
+    })
+});
+
 app.post('/venues', (request, response) => {
     todo.getArtistID(request.body.artist, 'aFVE4X3HUdTMjVLm').then((result) => {
         return todo.getConcerts(result.id, 'aFVE4X3HUdTMjVLm');
@@ -142,20 +156,16 @@ app.post('/question', (request, response) => {
 	}
 });
 
-app.post('/lyrics', (request, response) => {
-    todo.searchForSong(request.body.title, request.body.artist).then((result) => {
-        response.render('lyrics.hbs', {
-            title: 'Lyrics',
-            lyrics: result
-        })
-    })
-});
 
 app.get('/playlist', (request, response) => {
-	playlistObj = {}
-	playlistObj.playlist = todo.showPlaylist(currUser)
-	playlistObj.title = 'My Playlist'
-	playlistObj.name = currName
+	if (todo.showPlaylist(currUser) == 'error'){
+		playlistObj = {Error: 'There is no item in the playlist'}
+	} else {
+		playlistObj = {}
+		playlistObj.playlist = todo.showPlaylist(currUser)
+		playlistObj.title = 'My Playlist'
+		playlistObj.name = currName
+	}
 	response.render('playlist.hbs', playlistObj)
 })
 

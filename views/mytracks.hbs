@@ -52,12 +52,16 @@
         
         <script>
             
-            document.getElementById("menu").addEventListener("mouseover", function() {
-                document.getElementById("playlistForm").style.top = "60px";
-                document.getElementById("venuesForm").style.top = "110px";
-                document.getElementById("lyricsForm").style.top = "160px";
-                document.getElementById("logoutForm").style.top = "210px";
-            });
+            
+            var andArr = ["menuHeader", "playlistForm", "venuesForm", "lyricsForm", "logoutForm"]
+            for (var i = 0; i < andArr.length; i++){
+                document.getElementById(andArr[i]).addEventListener("mouseover", function() {
+                    document.getElementById("playlistForm").style.top = "60px";
+                    document.getElementById("venuesForm").style.top = "110px";
+                    document.getElementById("lyricsForm").style.top = "160px";
+                    document.getElementById("logoutForm").style.top = "210px";
+                });
+            }
             
             var anArr = ["fake", "search", "logo", "greet", "footer","songList"]
             for (var i = 0; i < anArr.length; i++){
