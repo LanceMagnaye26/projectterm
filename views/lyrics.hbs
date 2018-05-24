@@ -9,21 +9,17 @@
     
     
     <body>
-        <div id="userLoginHeader">
-            <a href="/mainpage" ><img id="logo" src="EventPlugLogo.png" /></a>
-        </div>
-        <div id="searchContainter">
-            <form id="search" method="post" action="/lyrics">
-                <input type="text" id="title" class="inputsd" name="title" placeholder="Enter song title here" required><br>
-                <input type="text" id="artist" class="inputsd" name="artist" placeholder="Enter artist name here" required><br>
-                <input type="submit" id="submit" value="Get Lyrics">
-            </form>
-        </div>
+
+        <a href="/mainpage" ><img id="logo" src="EventPlugLogo.png" /></a>
+
+        <form id="search" method="post" action="/lyrics">
+            <input type="text" id="title" class="inputsd" name="title" placeholder="Enter song title here" required>
+            <input type="text" id="artist" class="inputsd" name="artist" placeholder="Enter artist name here" required>
+            <input type="submit" id="submit" value="Get Lyrics">
+        </form>
+        <div id="Lyrics">{{error}}</div>
         <div id="Lyrics">{{lyrics}}</div>
 
-    <!--<script>-->
-        <!--document.getElementById("Lyrics").innerHTML = {{lyrics}};-->
-    <!--</script>-->
         {{> footer}}
     </body>
 </html>

@@ -7,6 +7,8 @@
     position:relative;
     width:425px;
 }
+
+
 #greet{
     position:absolute;
     top:1%;
@@ -28,7 +30,7 @@
     border:none;
     color: white;
     font-family: sans-serif;
-    border-radius:10px;
+    border-radius:5px;
     padding: 5px 60px;
     text-decoration: none;
     -webkit-transition-duration: 0.4s;
@@ -39,19 +41,23 @@
 .songTitle {
     position: absolute;
     top:0%;
-    left:30%;
+    left:32.5%;
+    color:#CACFD1;
 }
 
 .artist {
     position: absolute;
     top:30%;
-    left:30%;
+    left:32.5%;
+    color:#FCFEFF;
 }
 
 .image {
     position:absolute;
     left:0%;
     top:0%;
+    width:174px;
+    height:174px;
 }
 
 .songForm {
@@ -60,33 +66,14 @@
     height:45%;
     width:45%;
     margin-bottom: 10%;
+    margin-left: 4%;
 }
 
-.addtoPlaylist{
-    bottom:0px;
-    position: absolute;
-    left:0px;
-    background-color:#8DCAFF; 
-    border: none;
-    color: white;
-    padding: 5px 60px;
-    text-decoration: none;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius:10px;
-}
-
-.addtoPlaylist:hover{
-    background-color:#083B66;
-    color:white;
-}
 
 #songList {
     position:fixed;
     display:inline-block;
     left:0px;
-    right:0px;
     margin-top:1.5%;
     margin-bottom:1.5%;
     top:20%;
@@ -94,6 +81,7 @@
     height:70%;
     overflow-y: scroll;
 }
+
 #trackSearch{
     width:50%;
     height:30%;
@@ -103,33 +91,28 @@
     position:relative;
     outline: none;
 }
-#playlistForm {
-    position:absolute;
-    right:1%;
-    top:10%;
-}
+
 #logout {
     position: absolute;
     left:0.25%;
     top:1%;
 }
 
-#logout {
-    position: absolute;
-    left:0.25%;
-    top:1%;
+#logoutBut {
+    width:auto;
+    border-radius:5px;
 }
 
 .buttons {
     background-color:#8DCAFF; 
     border: none;
     color: white;
-    padding: 5px 60px;
+    padding: 5px 40px;
     text-decoration: none;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
-    border-radius:10px;
+    width:28.7%;
 }
 .buttons:hover {
     background-color:#083B66;
@@ -137,38 +120,81 @@
 }
 
 
-#playlistForm {
-    position:absolute;
-    right:1%;
-    top:5%;
-}
-
-#venuesForm {
-    position:absolute;
-    right:1%;
+#menu {
+    position: absolute;
+    width:160px;
+    height:260px;
     top:10%;
+    left:20%;
+    z-index:99;
 }
 
-#lyricsForm {
+#fake {
     position:absolute;
-    right:1%;
-    top:15%;
+    width:100vw;
+    height:100vh;
+    top:0px;
+    left:0px;
+    z-index:-1;
 }
+
+#menuHeader {
+    position:absolute;
+    height:60px;
+    width:100%;
+    top:0px;
+    left:0px;
+    background-color:#6AB1FB; 
+    border: none;
+    color: white;
+    padding: 5px 40px;
+    text-decoration: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#menuHeader:hover {
+    background-color:#083B66;
+    color:white;
+}
+
+.options {
+    position:absolute;
+    height:50px;
+    width:100%;
+    left:0px;
+    background-color:#1879DE; 
+    border: none;
+    color: white;
+    padding: 5px 40px;
+    text-decoration: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: "Tisa Pro Bold", sans-serif;
+    transition:1s;
+    top:0px;
+}
+
+
+.options:hover {
+    background-color:#083B66;
+    color:white;
+}
+
 
 #addtoPlaylist {
-    bottom:0px;
+    bottom:1.5px;
     position: absolute;
     left:0px;
-}
-
-.addtoPlaylist{
-    margin-top:0%;
-    
 }
 
 body{
     background-image: url('background.jpg');
     color: white;
+    font-family: sans-serif;
 }
 
 
@@ -177,5 +203,16 @@ body{
     top:1%;
     right:1.5%;
     margin-bottom: 1%;
+}
+
+#error {
+    position:absolute;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    top:0px;
+    margin:auto;
+    width:23vw;
+    height:5vh;
 }
 

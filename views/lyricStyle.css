@@ -1,7 +1,6 @@
 #Lyrics{
     position: fixed;
     bottom: 0%;
-    top:20%;
     width: 100%;
     height: 65%;
     white-space: pre-wrap;
@@ -23,46 +22,63 @@ body{
     top:0px;
     left:0px;
     right:0px;
-    position:relative;
+    position:absolute;
     width:425px;
 }
+
+#title {
+    position: absolute;
+    top:20%;
+}
+
+#artist {
+    position: absolute;
+    top:40%;
+}
+
 #submit {
+    position: absolute;
+    bottom:15%;
     background-color:#8DCAFF; 
     border: none;
     font-family: sans-serif;
     border-radius:10px;
     color: white;
-    padding: 5px 60px;
+    padding: 5px 40px;
     text-decoration: none;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
     display:inline-block;
-    margin:5px;
+    left:0px;
+    right:0px;
+    margin:auto;
+    width:70%;
 }
 
 #submit:hover {
     background-color:#083B66;
     color:white;
 }
-#searchContainter{
+
+#search{
     position:absolute;
-    top:10%;
-    bottom:0%;
-    left:45%;
-    height:50px;
-    margin:30px;
+    top:5%;
+    left:2.5%;
+    width:16%;
+    height:30%;
+    background-color: rgba(45,79,115,0.3);
+    border-radius: 50px;
 }
 .inputsd{
     font-family: sans-serif;
     padding:3px;
     border-radius:5px;
-    position:relative;
     outline: none;
-}
-#search{
-    position:relative;
-
+    left:0px;
+    right:0px;
+    margin:auto;
+    width:65%;
 }
 
 body{

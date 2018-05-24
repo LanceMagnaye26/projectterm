@@ -12,10 +12,6 @@ var key = '88668b813557eb90cd2054ce6cd4c990';
 var key2 = '4nuZkjXqOYPvMAIEtqyRhyaivjgtB76R';
 var app = express();
 
-
-
-
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) 
 
@@ -37,6 +33,20 @@ app.get('/venues', (request, response) => {
 	response.render('map.hbs', {
 		title: 'Maps'
 	})
+});
+
+app.post('/lyrics', (request, response) => {
+    todo.searchForSong(request.body.title, request.body.artist).then((result) => {
+		response.render('lyrics.hbs', {
+	        title: 'Lyrics',
+	        lyrics: result
+	    })
+    }).catch((error) => {
+    	response.render('lyrics.hbs', {
+    		title: 'Lyrics not Found',
+    		error: 'Could not find lyrics'
+    	})
+    })
 });
 
 app.post('/venues', (request, response) => {
@@ -103,20 +113,59 @@ app.get('/lyrics', (request, response) => {
     })
 });
 
-app.post('/lyrics', (request, response) => {
-    todo.searchForSong(request.body.title, request.body.artist).then((result) => {
-        response.render('lyrics.hbs', {
-            title: 'Lyrics',
-            lyrics: result
-        })
+app.get('/forgot', (request, response) => {
+    response.render('forgot.hbs', {
+        title: 'Forgot username/password',
+        check: 0
     })
 });
 
+app.post('/forgot', (request, response) => {
+	global.forgotUser = request.body.forgotEmail
+	if (todo.duplicateUsers(forgotUser) == 0) {
+		global.userQuestion = todo.getQues(forgotUser)
+		response.render('secQues.hbs', {
+	        title: 'Forgot username/password',
+	        question: userQuestion,
+	        check: 1
+	    })
+	} else {
+		response.render('forgot.hbs', {
+	        title: 'Forgot username/password',
+	        check: 1
+	    })
+	}
+});
+
+app.post('/question', (request, response) => {
+	if (todo.checkQues(forgotUser, request.body.userAnswer) == 1) {
+		response.render('accountInfo.hbs', {
+			title: 'Information',
+			name: todo.getName(forgotUser),
+			username: forgotUser,
+			password: todo.getPass(forgotUser),
+			question: userQuestion,
+			answer: todo.getAns(forgotUser)
+		})
+	} else {
+		response.render('secQues.hbs', {
+	        title: 'Forgot username/password',
+	        question: userQuestion,
+	        check: 0
+	    })
+	}
+});
+
+
 app.get('/playlist', (request, response) => {
-	playlistObj = {}
-	playlistObj.playlist = todo.showPlaylist(currUser)
-	playlistObj.title = 'My Playlist'
-	playlistObj.name = currName
+	if (todo.showPlaylist(currUser) == 'error'){
+		playlistObj = {Error: 'There is no item in the playlist'}
+	} else {
+		playlistObj = {}
+		playlistObj.playlist = todo.showPlaylist(currUser)
+		playlistObj.title = 'My Playlist'
+		playlistObj.name = currName
+	}
 	response.render('playlist.hbs', playlistObj)
 })
 
@@ -131,7 +180,6 @@ app.post('/mytracks', (request, response) => {
 	todo.getTracks(request.body.track, key).then((result) => {
 		trackList = {};
 		if('Error' in result) {
-			// result.search = 0
 			result.name = currName;
 			response.render('mytracks.hbs', result)
 		} else{
@@ -146,7 +194,6 @@ app.post('/mytracks', (request, response) => {
 			}
 			trackList.playlist = bigArr;
 			trackList.name = currName
-			// console.log(trackList)
 			response.render('mytracks.hbs', trackList)
 		}
 	}).catch((error) => {
