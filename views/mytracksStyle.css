@@ -186,9 +186,27 @@
 
 
 #addtoPlaylist {
-    bottom:1.5px;
+    width:100%;
+}
+
+#addForm {
+    bottom:0.5%;
     position: absolute;
     left:0px;
+    width:174px;
+    height:auto;
+}
+
+#getLyricsForm{
+    position: absolute;
+    left:0px;
+    width:174px;
+    bottom:-25px;
+    height:auto;
+}
+
+#getLyricsBut {
+    width:100%;
 }
 
 body{
@@ -215,4 +233,6 @@ body{
     width:23vw;
     height:5vh;
 }
+
+
 

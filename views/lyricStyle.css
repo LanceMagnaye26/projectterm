@@ -12,10 +12,7 @@
 
 }
 
-body{
-    width: 100%;
-    font-family: "Comic Sans MS";
-}
+
 #logo {
     display:block;
     margin:auto;
@@ -82,6 +79,8 @@ body{
 }
 
 body{
+    font-family: "Comic Sans MS";
     background-image: url('background.jpg');
     color: white;
 }
+
