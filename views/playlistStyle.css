@@ -50,4 +50,15 @@ body{
     margin-left: 4%;
 }
 
+#error {
+    position:absolute;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    top:0px;
+    margin:auto;
+    width:29vw;
+    height:5vh;
+    font-family: sans-serif;
+}
 

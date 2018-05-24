@@ -310,16 +310,16 @@ var addPlaylist = (song, artist, image) => {
 var searchForSong = (songName, artistName="") => { // changed artistName to have a default of "", so we can do searchForSong(songName);
     return new Promise((resolve,reject) => {
         querySong(songName, artistName).then((song) => {
-            if (song.id == 0) {
-                reject("Cannot find song");
+            if (song.id != 0) {
+              lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
+                resolve(results.lyrics);
+              });
+            } else {
+              reject('Could not find lyrics');
             }
-
-
-			lyricist.song(song.id, {fetchLyrics: true}).then((results) => {
-				resolve(results.lyrics);
-			});
-
-        });
+        }).catch((error) => {
+          reject('Could not find lyrics')
+        })
     })
 };
 
@@ -330,7 +330,11 @@ var searchForSong = (songName, artistName="") => { // changed artistName to have
  */
 var showPlaylist = (user) => {
 	var usersArr = loadFile();
-	return usersArr[user].playlist
+  if (usersArr[user].playlist.length == 0) {
+    return 'error'
+  } else {
+    return usersArr[user].playlist
+  }
 };
 
 /**
@@ -339,17 +343,12 @@ var showPlaylist = (user) => {
  * @param {string} artistName - Name of the artist that makes the song
  */var querySong = (songName, artistName) => {
     return new Promise((resolve, reject) => {
-        lyricist.search(songName).then((results) => { // results is the array of the returned search results
-            results.some((song, index, _arr) => { // Loop through the idvidual songs
-                if(artistName == "") { // if the aristName wasn't provided in searchForSong
-                    console.log("No artist provided."); // Choosing random top song");
-                    //var randIdx = getRndInteger(0, results.length);
-                    //console.log("Index %d chosen", randIdx);
-                    //resolve(results[randIdx]);
-                    //return true;
-                }
-                else if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
-                    resolve(song);
+        lyricist.search(songName).then((results) => {
+            results.some((song, index, _arr) => { 
+                if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
+                  resolve(song);
+                }else {
+                  reject('Inccorect artist name')
                 }
             });
         });
