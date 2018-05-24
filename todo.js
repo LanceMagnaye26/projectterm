@@ -341,18 +341,19 @@ var showPlaylist = (user) => {
  * This function takes in the song and the artist of the song to produce the song ID for searchForSong()
  * @param {string} songName - Name of the song the user wants to search up
  * @param {string} artistName - Name of the artist that makes the song
- */var querySong = (songName, artistName) => {
-    return new Promise((resolve, reject) => {
-        lyricist.search(songName).then((results) => {
-            results.some((song, index, _arr) => { 
-                if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
-                  resolve(song);
-                }else {
-                  reject('Inccorect artist name')
-                }
-            });
-        });
-    });
+ */
+var querySong = (songName, artistName) => {
+  return new Promise((resolve, reject) => {
+      lyricist.search(songName).then((results) => {
+          results.some((song, index, _arr) => { 
+              if (song.primary_artist.name.toLowerCase() == artistName.toLowerCase()) { // check if the artist contains your search term
+                resolve(song);
+              }else {
+                reject('Inccorect artist name')
+              }
+          });
+      });
+  });
 };
 
 

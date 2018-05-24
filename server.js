@@ -35,6 +35,20 @@ app.get('/venues', (request, response) => {
 	})
 });
 
+app.post('/songlyrics', (request, response) => {
+	todo.searchForSong(request.body.songTitle, request.body.artistTitle).then((result) => {
+		response.render('songLyrics.hbs', {
+	        title: 'Lyrics',
+	        lyrics: result
+	    })
+    }).catch((error) => {
+    	response.render('songLyrics.hbs', {
+    		title: 'Lyrics not Found',
+    		error: 'Could not find lyrics'
+    	})
+    })
+})
+
 app.post('/lyrics', (request, response) => {
     todo.searchForSong(request.body.title, request.body.artist).then((result) => {
 		response.render('lyrics.hbs', {

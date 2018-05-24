@@ -32,7 +32,7 @@
         <div id="songList">
             <h2 id="error">{{Error}}</h2>
             {{#each playlist}}
-                <form class="songForm" action="/tracks" method="post">
+                <div class="songForm">
                     <h2 class="songTitle">
                         {{songTitle}}
                     </h2>
@@ -40,11 +40,18 @@
                         {{artist}}
                     </h3>
                     <img src="{{image}}" class="image">
-                    <input id="addtoPlaylist" class="buttons" type="submit" value="Add to playlist"/>
-                    <input type="hidden" name="songName" value="{{songTitle}}">
-                    <input type="hidden" name="artistName" value="{{artist}}">
-                    <input type="hidden" name="image" value="{{image}}">
-                </form>
+                    <form id="addForm" action="/tracks" method="post">
+                        <input id="addtoPlaylist" class="buttons" type="submit" value="Add to playlist"/>
+                        <input type="hidden" name="songName" value="{{songTitle}}">
+                        <input type="hidden" name="artistName" value="{{artist}}">
+                        <input type="hidden" name="image" value="{{image}}">
+                    </form>
+                    <form id="getLyricsForm" action="/songlyrics" method="post">
+                        <input id="getLyricsBut" class="buttons" type="submit" value="Song Lyrics"/>
+                        <input type="hidden" name="songTitle" value="{{songTitle}}">
+                        <input type="hidden" name="artistTitle" value="{{artist}}">
+                    </form>
+                </div>
             {{/each}}
         </div>
         
