@@ -78,6 +78,7 @@ test('test if a track is searched', () => {
 });
 
 
+
 test('tests querySong', () => {
     expect.assertions(1);
     return todo.querySong('Lift Yourself', 'Kanye West').then(data =>{
@@ -93,5 +94,6 @@ test('tests searchForSong', () => {
     })
 
 });
+
 
 

@@ -5,11 +5,15 @@ body{
 }
 
 #logo {
+    display:block;
+    margin:auto;
     top:0px;
     left:0px;
-    position:absolute;
+    right:0px;
+    position:relative;
     width:425px;
 }
+
 #songList {
     position:absolute;
     display:inline-block;
